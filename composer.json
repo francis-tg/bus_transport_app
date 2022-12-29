@@ -1,0 +1,16 @@
+{
+    "name": "cisco/shadow",
+    "description": "bus ticket vending",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Cisco\\Shadow\\": "src/"
+        }
+    },
+    "scripts": {
+        "server": "cd ./public && php -S localhost:86"
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
