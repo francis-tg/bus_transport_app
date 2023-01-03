@@ -44,5 +44,18 @@ class database extends ORM
         $this->createRelationship("ticket", "id_depart", "depart", "id");
         $this->createRelationship("ticket", "id_arrive", "destination", "id");
 
+        if (!$this->select("role", ["*"],"nom_role='administrateur'")) {
+            $this->insert("role", [
+                "nom_role" => "administrateur",
+            ]);
+
+        }
+        if (!$this->select("role", ["*"],"nom_role='personnel'")) {
+            $this->insert("role", [
+                "nom_role" => "personnel",
+            ]);
+        }
+
+        $this->addColumn("user", "password", "VARCHAR(60)");
     }
 }

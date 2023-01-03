@@ -31,12 +31,12 @@ class Page
         if (self::viewContainDirectory($view, '/')) {
             $separate_file_to_dir = explode('/', $view);
             if (in_array($separate_file_to_dir[1].'.php', $separate_file_to_dir)) {
-                return require '.'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$separate_file_to_dir[0].DIRECTORY_SEPARATOR.$separate_file_to_dir[1].'.php';
+                return require '..'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$separate_file_to_dir[0].DIRECTORY_SEPARATOR.$separate_file_to_dir[1].'.php';
             } else {
                 return require_once '.'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'404.php';
             }
         } else {
-            return require '.'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$view.'.php';
+            return require '..'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$view.'.php';
         }
     }
 
