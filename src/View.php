@@ -7,8 +7,8 @@ class View extends Router
 {
 
     static $blocks = array();
-    static $cache_path = './.cache/';
-    static $cache_enabled =TRUE;
+    static $cache_path = '../.cache/';
+    static $cache_enabled =FALSE;
 
     static $file_path = "../views/";
 
@@ -38,6 +38,7 @@ class View extends Router
     public static function clearCache()
     {
         foreach (glob(self::$cache_path . '*') as $file) {
+            var_dump($file);
             unlink($file);
         }
     }
@@ -49,10 +50,11 @@ class View extends Router
         $code = self::compileEscapedEchos($code);
         $code = self::compileEchos($code);
         $code = self::compilePHP($code);
+        self::clearCache();
         return $code;
     }
 
-    public static function includeFiles($file)
+    private static function includeFiles($file)
     {
         $code = file_get_contents($file);
         preg_match_all('/{% ?(extends|include) ?\'?(.*?)\'? ?%}/i', $code, $matches, PREG_SET_ORDER);
@@ -63,22 +65,22 @@ class View extends Router
         return $code;
     }
 
-    public static function compilePHP($code)
+    private static function compilePHP($code)
     {
         return preg_replace('~\{%\s*(.+?)\s*\%}~is', '<?php $1 ?>', $code);
     }
 
-    public static function compileEchos($code)
+    private static function compileEchos($code)
     {
         return preg_replace('~\{{\s*(.+?)\s*\}}~is', '<?php echo $1 ?>', $code);
     }
 
-    public static function compileEscapedEchos($code)
+    private static function compileEscapedEchos($code)
     {
         return preg_replace('~\{{{\s*(.+?)\s*\}}}~is', '<?php echo htmlentities($1, ENT_QUOTES, \'UTF-8\') ?>', $code);
     }
 
-    public static function compileBlock($code)
+    private static function compileBlock($code)
     {
         preg_match_all('/{% ?block ?(.*?) ?%}(.*?){% ?endblock ?%}/is', $code, $matches, PREG_SET_ORDER);
         foreach ($matches as $value) {
@@ -96,7 +98,7 @@ class View extends Router
         return $code;
     }
 
-    public static function compileYield($code)
+    private static function compileYield($code)
     {
         foreach (self::$blocks as $block => $value) {
             $code = preg_replace('/{% ?yield ?' . $block . ' ?%}/', $value, $code);

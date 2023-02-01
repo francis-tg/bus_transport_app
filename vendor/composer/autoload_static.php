@@ -9,11 +9,16 @@ class ComposerStaticInit6088efd6a0020a986c9ba6c37d50e8c6
     public static $prefixLengthsPsr4 = array (
         'C' => 
         array (
+            'Cisco\\Shadow\\Controllers\\' => 25,
             'Cisco\\Shadow\\' => 13,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Cisco\\Shadow\\Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Controllers',
+        ),
         'Cisco\\Shadow\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

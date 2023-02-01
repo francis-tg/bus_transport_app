@@ -5,7 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Cisco\\Shadow\\": "src/"
+            "Cisco\\Shadow\\": "src/",
+            "Cisco\\Shadow\\Controllers\\": "Controllers/"
         }
     },
     "scripts": {

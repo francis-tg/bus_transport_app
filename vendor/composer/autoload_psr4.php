@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Cisco\\Shadow\\Controllers\\' => array($baseDir . '/Controllers'),
     'Cisco\\Shadow\\' => array($baseDir . '/src'),
 );
