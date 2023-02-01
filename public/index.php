@@ -1,15 +1,23 @@
 <?php
+use Cisco\Shadow\ORM\ORM;
 use Cisco\Shadow\Page;
 use Cisco\Shadow\Request\User;
+use Cisco\Shadow\View;
 
 require_once '../vendor/autoload.php';
 require("../backend/index.php");
-use  Cisco\Shadow\Router;
 
-$router = new Router();
+$db = new ORM();
 
-$router->get("/", function () {
-    Page::view("index");
+
+$router = new View();
+
+$router->get("/admin", function () {
+    $users = $GLOBALS["db"]->select("user", ["*"]);
+
+    $role = $GLOBALS["db"]->select("role", ["*"]);
+
+    View::render("admin/index",["users"=>$users,"roles"=>$role]);
 });
 $router->get("/login", function () {
     echo "login";
@@ -26,6 +34,9 @@ $router->get("/logout", function () {
     header("Location: /login");
 });
 
+$router->HandlerNotFound(function () {
+    echo "Not found";
+});
 $router->run();
 
 ?>

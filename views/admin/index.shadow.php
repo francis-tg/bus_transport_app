@@ -1,16 +1,6 @@
-<?php
-use Cisco\Shadow\ORM\ORM;
-include('includes/header.php'); 
-include('includes/navbar.php');
 
-$db = new ORM();
-
-$users = $db->select("user", ["*"]);
-
-$role = $db->select("role", ["*"]);
-?>
-
-
+{% extends ../views/layouts/main.shadow.php %}
+{% block content %}
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -143,9 +133,9 @@ $role = $db->select("role", ["*"]);
               <label for="">Selectionner le role</label>
               <select class="form-control" name="id_role" id="role">
                 <option value="">Selectionner un role</option>
-                <?php foreach ($role as $key => $value) {
-                echo '<option value="'.$value["id"].'">'.$value["nom_role"].'</option>';
-                }?>
+              {% foreach ($roles as $role):%}
+                <option value="{{$role['id']}}">{{$role["nom_role"]}}</option>
+              {% endforeach %}
                 
               </select>
             </div>
@@ -191,23 +181,22 @@ $role = $db->select("role", ["*"]);
         </thead>
         <tbody>
      
-          <?php
+         {% foreach ($users as $value): %}
 
-          foreach ($users as $key=> $value) {?>
             <tr>
             <td> 1 </td>
-            <td><?=$value["nom"]?></td>
-            <td> <?=$value["prenom"]?></td>
-            <td> <?=$value["phone"]?></td>
+            <td>{{$value["nom"]}}</td>
+            <td> {{$value["prenom"]}}</td>
+            <td> {{$value["phone"]}}</td>
             <td>
-                <button  class="btn btn-success" data-target="#edit<?=$value['id']?>" data-toggle="modal">editer</button>
+                <button  class="btn btn-success" data-target="#edit{{$value['id']}}" data-toggle="modal">editer</button>
             </td>
             <td>
                   <button name="delete_btn"  class="btn btn-danger">supprimer</button>
             </td>
           </tr>
 
-          <div id="edit<?=$value['id']?>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <div id="edit{{$value['id']}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-body">
@@ -215,30 +204,29 @@ $role = $db->select("role", ["*"]);
                     <div class="form-group">
                       <label for="">Nom</label>
                       <input type="text" 
-                        class="form-control" name="nom" id="" aria-describedby="helpId" placeholder="Nom" value="<?=$value['nom']?>">
+                        class="form-control" name="nom" id="" aria-describedby="helpId" placeholder="Nom" value="{{$value['nom']}}">
                       <small id="helpId" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
                       <label for="">Prenom</label>
                       <input type="text" 
-                        class="form-control" name="prenom" id="" aria-describedby="helpId" placeholder="Prenom" value="<?=$value['prenom']?>">
+                        class="form-control" name="prenom" id="" aria-describedby="helpId" placeholder="Prenom" value="{{$value['prenom']}}">
                       <small id="helpId" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
                       <label for="">Contact</label>
                       <input type="tel" 
-                        class="form-control" name="phone" id="" aria-describedby="helpId" placeholder="Contact" value="<?=$value['phone']?>">
+                        class="form-control" name="phone" id="" aria-describedby="helpId" placeholder="Contact" value="{{$value['phone']}}">
                       <small id="helpId" class="form-text text-muted"></small>
                     </div>
-                    <input type="hidden" name="user_id" value="<?=$value['id']?>">
+                    <input type="hidden" name="user_id" value="{{$value['id']}}">
                     <button class="btn btn-primary w-100" type="submit">Modifier</button>
                   </form>
                 </div>
               </div>
             </div>
           </div>
-          <?php }
-          ?>
+         {% endforeach; %}
         
         </tbody>
       </table>
@@ -280,10 +268,4 @@ $role = $db->select("role", ["*"]);
 
 
 
-
-  <?php
-
-include('includes/footer.php');
-include 'includes/scripts.php';
-
-?>
+{% endblock %}
