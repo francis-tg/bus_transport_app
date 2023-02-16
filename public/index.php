@@ -1,5 +1,6 @@
 <?php
 require_once '../vendor/autoload.php';
+require("../backend/index.php");
 use Cisco\Shadow\Controllers\Admin;
 use Cisco\Shadow\Controllers\Trajet;
 use Cisco\Shadow\ORM\ORM;
@@ -9,9 +10,13 @@ use Cisco\Shadow\View;
 $db = new ORM();
 
 $router = new View();
-$admin = new Admin();
 
-$router->get("/admin", $admin->Index());
+$router->get("/", function () {
+    echo "test";
+});
+$router->get("/admin",Admin::class . "::Index");
+
+
 $router->get("/login", function () {
     echo "login";
 });
