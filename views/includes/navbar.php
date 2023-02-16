@@ -29,7 +29,7 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-  <a class="nav-link collapsed" href="register.php" >
+  <a class="nav-link collapsed" href="#" >
     <i class="fas fa-fw fa-user"></i>
     <span>Receptionistes</span>
   </a>
@@ -40,16 +40,16 @@
 
 
 <li class="nav-item">
-  <a class="nav-link" href="pasager.php">
+  <a class="nav-link" href="/passagers">
     <i class="fas fa-fw fa-chart-area"></i>
-    <span>liste des pasagés</span></a>
+    <span>liste des passagés</span></a>
 </li>
 
 
 
 <!-- Nav Item - Utilities Collapse Menu -->
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#">
+  <a class="nav-link collapsed" href="/trajet">
     <i class="fas fa-fw fa-wrench"></i>
     <span>Traget</span>
   </a>
@@ -69,7 +69,7 @@
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
-  <a class="nav-link" href="charts.html">
+  <a class="nav-link" href="/trajet">
     <i class="fas fa-fw fa-chart-area"></i>
     <span>Traget</span></a>
 </li>

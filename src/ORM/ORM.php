@@ -17,7 +17,7 @@ class ORM extends db
     public function createTable(string $table_name, array $fields)
     {
         // Start building the SQL query
-        $query = "CREATE TABLE $table_name (\n";
+        $query = "CREATE TABLE IF NOT EXISTS $table_name (\n";
         // Add each field to the query
         foreach ($fields as $field_name => $field_type) {
             $query .= "$field_name $field_type,\n";
@@ -39,8 +39,8 @@ class ORM extends db
      */
     public function createRelationship(string $table_name, string $field_name,string  $related_table, string $related_field)
     {
-        $query = "ALTER TABLE $table_name ADD FOREIGN KEY ($field_name) REFERENCES $related_table($related_field) ON DELETE CASCADE ON UPDATE CASCADE";
-        $this->pdo->exec($query);
+            $query = "ALTER TABLE $table_name ADD FOREIGN KEY ($field_name) REFERENCES $related_table($related_field) ON DELETE CASCADE ON UPDATE CASCADE";
+            $this->pdo->exec($query);
     }
     /**
      * Summary of addColumn
@@ -50,7 +50,7 @@ class ORM extends db
      * @return void
      */
     function addColumn(string $table_name, string $field_name, string  $value){
-        $query = "ALTER TABLE $table_name ADD $field_name $value";
+        $query = "ALTER TABLE $table_name ADD IF NOT EXISTS $field_name $value";
         $this->pdo->exec($query);
     }
     /**

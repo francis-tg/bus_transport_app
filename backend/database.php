@@ -5,6 +5,15 @@ class database extends ORM
 {
     public function start()
     {
+        $this->createTable("relation_schema", [
+            'id' => 'INT(6) AUTO_INCREMENT PRIMARY KEY',
+            'table_name' => 'VARCHAR(30) NOT NULL',
+            'column_name' => 'VARCHAR(30) NOT NULL',
+            'related_table' => 'VARCHAR(30) NOT NULL',
+            'related_column' => 'VARCHAR(30) NOT NULL',
+            'createAt' => 'DATETIME(6) DEFAULT CURRENT_TIMESTAMP NOT NULL',
+        ]);
+
         $this->createTable("role", [
             'id' => 'INT(6) AUTO_INCREMENT PRIMARY KEY',
             'nom_role' => 'VARCHAR(30) NOT NULL',

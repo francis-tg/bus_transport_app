@@ -1,0 +1,4 @@
+<?php 
+include("./backend/database.php");
+$d = new database();
+$d->start();
