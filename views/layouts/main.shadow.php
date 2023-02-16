@@ -3,7 +3,6 @@
 	<head>
 		<title>{% yield title %}</title>
         <meta charset="utf-8">
-       <title> Admin Panel</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

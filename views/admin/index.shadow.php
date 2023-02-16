@@ -1,5 +1,6 @@
 
 {% extends ../views/layouts/main.shadow.php %}
+{% block title %}{{ $title }}{% endblock %}
 {% block content %}
 <!-- Begin Page Content -->
 <div class="container-fluid">

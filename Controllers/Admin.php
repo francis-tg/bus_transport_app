@@ -12,7 +12,7 @@ class Admin extends ORM
 
         $role = $this->select("role", ["*"]);
 
-       return  View::render("admin/index", ["users" => $users, "roles" => $role]);
+       View::render("admin/index", ["title"=>"Admin","users" => $users, "roles" => $role]);
 
     }
     

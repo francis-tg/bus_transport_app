@@ -14,7 +14,7 @@ class ORM extends db
        * @return void
        */
     
-    public function createTable(string $table_name, array $fields)
+    public function createTable(string $table_name, array $fields )
     {
         // Start building the SQL query
         $query = "CREATE TABLE IF NOT EXISTS $table_name (\n";
@@ -39,8 +39,19 @@ class ORM extends db
      */
     public function createRelationship(string $table_name, string $field_name,string  $related_table, string $related_field)
     {
+        $fq = "SELECT table_name, 
+            column_name, 
+            referenced_table_name, 
+            referenced_column_name
+            FROM information_schema.key_column_usage
+            WHERE table_name='$table_name' AND referenced_table_name = '$related_table'";
+        $f = $this->pdo->prepare($fq);
+        $f->execute();
+        if(empty($f->fetch()["referenced_table_name"])==true){
             $query = "ALTER TABLE $table_name ADD FOREIGN KEY ($field_name) REFERENCES $related_table($related_field) ON DELETE CASCADE ON UPDATE CASCADE";
             $this->pdo->exec($query);
+
+        }
     }
     /**
      * Summary of addColumn

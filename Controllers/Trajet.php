@@ -13,6 +13,6 @@ class Trajet extends Destination{
         return $this->addDestination($data);
     }
     function Home(){
-        View::render("admin/trajet");
+        View::render("admin/trajet",["title"=>"Admin | Trajets"]);
     }
 }
