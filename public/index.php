@@ -1,4 +1,5 @@
 <?php
+use Cisco\Shadow\Controllers\Client;
 require_once '../vendor/autoload.php';
 require("../backend/index.php");
 use Cisco\Shadow\Controllers\Admin;
@@ -11,9 +12,7 @@ $db = new ORM();
 
 $router = new View();
 
-$router->get("/", function () {
-    echo "test";
-});
+$router->get("/",Client::class."::Index");
 $router->get("/admin",Admin::class . "::Index");
 
 
@@ -24,9 +23,9 @@ $router->get("/trajet", Trajet::class . "::Home");
 
 $router->post("/add-user", User::class . "::addUser");
 $router->post("/edit-user", User::class . "::editUser");
-$router->post("/add-depart", Trajet::class."::addDepart");
-$router->post("/add-dest", Trajet::class . "::addDest");
-$router->post("/login", User::class . "::login");
+$router->post("/api/add-depart", Trajet::class."::addDepart");
+$router->post("/api/add-dest", Trajet::class . "::addDest");
+$router->post("/api/login", User::class . "::login");
 $router->get("/user/set-pwd", function () {
 
 });

@@ -1,0 +1,622 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+*,
+body,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+body header {
+  width: 100%;
+  height: 9vh;
+  padding: 0 1.5rem;
+  background-color: #1D2F6F;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+body header nav {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+body header nav .logo {
+  color: white;
+  font-family: "Fredoka One", cursive;
+  font-size: 23px;
+}
+body header nav ul {
+  list-style: none;
+  font-family: "Exo 2", sans-serif;
+}
+body header nav ul li {
+  margin-left: 5rem;
+  font-size: 16px;
+  float: left;
+}
+body header nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+body header nav .buttons .btn_login {
+  padding: 0.6rem 1.8rem;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  color: #1D2F6F;
+  background-color: white;
+}
+body header nav .buttons .btn_sigin {
+  padding: 0.6rem 1.8rem;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  color: white;
+  background-color: black;
+  color: white;
+}
+body .fondu-out {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+  display: none;
+  transform: translateY(-200vh);
+}
+body .loader {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1D2F6F;
+  z-index: 50;
+  overflow: hidden;
+}
+body .loader span {
+  color: #3B28CC;
+  font-size: 80px;
+  letter-spacing: 15px;
+  animation: flash 1.2s linear infinite;
+}
+body .loader span:nth-child(1) {
+  animation-delay: 0.1s;
+}
+body .loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+body .loader span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+body .loader span:nth-child(4) {
+  animation-delay: 0.4s;
+}
+body .loader span:nth-child(5) {
+  animation-delay: 0.5s;
+}
+body .loader span:nth-child(6) {
+  animation-delay: 0.6s;
+}
+body .loader span:nth-child(7) {
+  animation-delay: 0.7s;
+}
+@keyframes flash {
+  0% {
+    color: #3B28CC;
+    text-shadow: 0 0 7px #fff900;
+  }
+  90% {
+    color: #484848;
+    text-shadow: none;
+  }
+  100% {
+    color: #3B28CC;
+    text-shadow: 0 0 7px #fff900;
+  }
+}
+body .hero {
+  width: 100%;
+  height: 60vh;
+  background: rgb(63, 142, 252);
+  background: linear-gradient(90deg, rgb(63, 142, 252) 0%, rgba(135, 191, 255, 0.3393732493) 48%, rgb(173, 215, 246) 72%, rgba(255, 255, 255, 0) 100%);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+}
+body .hero .left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+body .hero .left .center {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 60%;
+  height: 100%;
+}
+body .hero .left .center h1 {
+  margin-bottom: 20px;
+  font-family: "Fredoka One", cursive;
+  color: #3B28CC;
+  font-weight: 100;
+}
+body .hero .left .center p {
+  margin-bottom: 15px;
+  font-family: "DM Sans", sans-serif;
+  color: #495fae;
+}
+body .hero .left .center button {
+  padding: 1rem 2rem;
+  background-color: #1D2F6F;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-family: "Fredoka One", cursive;
+}
+body .hero .right {
+  width: 50%;
+  height: 100%;
+}
+body .hero .right .img {
+  width: 100%;
+  height: 100%;
+}
+body .hero .right .img img {
+  width: auto;
+  height: 100%;
+}
+body .hero .book_section {
+  position: absolute;
+  width: 80%;
+  height: 10vh;
+  bottom: -50px;
+  background: #1D2F6F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .hero .book_section .inner_book {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+body .hero .book_section .inner_book input {
+  width: 16%;
+  height: 80%;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  padding: 0.6rem 1.2rem;
+  z-index: 10;
+}
+body .hero .book_section .inner_book .book-btn {
+  cursor: pointer;
+  width: 100px;
+  height: 80%;
+  border-radius: 5px;
+  padding: 0.6rem 1.2rem;
+  background-color: #495fae;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+body .hero .book_section .inner_book .book-btn a i {
+  color: white;
+}
+body .contain_item {
+  width: 100%;
+  height: min-content;
+  padding: 1rem 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+body .contain_item .item {
+  box-shadow: -2px 10px 29px -12px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -2px 10px 29px -12px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -2px 10px 29px -12px rgba(0, 0, 0, 0.75);
+  max-width: 400px;
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  position: relative;
+}
+body .contain_item .item .header {
+  width: 100;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+body .contain_item .item .header .left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .contain_item .item .header .left img {
+  width: 13px;
+  height: auto;
+}
+body .contain_item .item .header .left h1 {
+  font-size: 15px;
+  margin-left: 10px;
+  color: #484848;
+}
+body .contain_item .item .header .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .contain_item .item .header .right span {
+  color: #2667FF;
+}
+body .contain_item .item .trajet {
+  padding: 0 3rem;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+body .contain_item .item .trajet .tiret {
+  background-color: #484848;
+  max-width: 60px;
+  width: 100%;
+  height: 2px;
+}
+body .contain_item .item .trajet .prix_trajet {
+  max-width: 80px;
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: #2667FF;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+body .contain_item .item .more {
+  position: absolute;
+  bottom: 8%;
+  left: 8%;
+  cursor: pointer;
+}
+body .vide {
+  width: 100%;
+  height: 10vh;
+}
+body .popular_destination {
+  width: 100%;
+  height: 600px;
+  background-color: #2667FF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+body .popular_destination .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 20%;
+}
+body .popular_destination .header span {
+  font-size: 18px;
+  margin-bottom: 5px;
+  font-family: "Quicksand", sans-serif;
+  color: rgba(29, 47, 111, 0.5333333333);
+}
+body .popular_destination .header h1 {
+  font-size: 29px;
+  font-family: "Quicksand", sans-serif;
+  color: white;
+}
+body .popular_destination .slider_container {
+  max-width: 1120px;
+  width: 100%;
+}
+body .popular_destination .slider_container .slide-content {
+  margin: 0 40px;
+}
+body .popular_destination .slider_container .slide-content .card-wrapper .card {
+  border-radius: 20px;
+  background-color: #1D2F6F;
+  width: 320px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 1px 11px 11px -6px rgba(0, 0, 0, 0.48);
+  -webkit-box-shadow: 1px 11px 11px -6px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: 1px 11px 11px -6px rgba(0, 0, 0, 0.48);
+}
+body .popular_destination .slider_container .slide-content .card-wrapper .card .image-content {
+  position: relative;
+  height: 70%;
+  width: 100%;
+}
+body .popular_destination .slider_container .slide-content .card-wrapper .card .image-content img {
+  height: 100%;
+  width: 100%;
+}
+body .popular_destination .slider_container .slide-content .card-wrapper .card .card-content {
+  width: 100%;
+  height: 30%;
+  background-color: white;
+  color: black;
+  padding: 0.4rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+body .popular_destination .slider_container .slide-content .card-wrapper .card .card-content span {
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+body .popular_destination .slider_container .slide-content .card-wrapper .card .card-content h2 {
+  margin-bottom: 10px;
+}
+body .popular_destination .slider_container .slide-content .card-wrapper .card .card-content .note {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+body .popular_destination .slider_container .slide-content .card-wrapper .card .card-content .note .secondNote span {
+  color: #3B28CC;
+}
+body .popular_destination .slider_container .slide-content .card-wrapper .card .card-content .note .secondNote span i {
+  color: #3B28CC;
+}
+body .service {
+  margin-top: 60px;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .service .left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+}
+body .service .left .image {
+  width: 60%;
+  height: 100%;
+  border-radius: 30px;
+  padding-right: 20px;
+}
+body .service .left .image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  object-fit: cover;
+}
+body .service .right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+body .service .right .center {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+body .service .right .center .header {
+  width: 100%;
+  height: 30%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+body .service .right .center .header::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  border-radius: 10px;
+  height: 5px;
+  width: 60px;
+  background-color: #3B28CC;
+}
+body .service .right .center .header span {
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: rgba(29, 30, 35, 0.631372549);
+}
+body .service .right .center .header h1 {
+  font-family: "Quicksand", sans-serif;
+  color: rgba(29, 30, 35, 0.631372549);
+  font-size: 33px;
+}
+body .service .right .center .content {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+}
+body .service .right .center .content .card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+body .service .right .center .content .card .image {
+  width: 20%;
+  height: 100%;
+  background-color: rgba(174, 179, 184, 0.516);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .service .right .center .content .card .image i {
+  font-size: 24px;
+  color: #3B28CC;
+}
+body .service .right .center .content .card .text {
+  margin-right: 40px;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+}
+body .service .right .center .content .card .text h1 {
+  color: rgba(25, 34, 68, 0.6705882353);
+  font-size: 22px;
+}
+body .service .right .center .content .card .text p {
+  color: rgba(29, 47, 111, 0.4941176471);
+  font-family: "Fredoka One", cursive;
+}
+body .destination_inspiration {
+  margin-top: 50px;
+  width: 100%;
+  height: 500px;
+}
+body .destination_inspiration h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: "Quicksand", sans-serif;
+  font-size: 22px;
+  color: rgba(29, 30, 35, 0.631372549);
+}
+body .destination_inspiration .contain_inspiration {
+  margin: 0 auto;
+  width: 80%;
+  height: 400px;
+  display: grid;
+  grid-template-areas: "card1 car2 car3" "card1 card4 car5";
+  grid-gap: 10px;
+}
+body .destination_inspiration .contain_inspiration .card {
+  background-color: rgba(28, 24, 24, 0.759);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+body .destination_inspiration .contain_inspiration .card:hover .card_text {
+  transform: translateY(0);
+  bottom: 0;
+}
+body .destination_inspiration .contain_inspiration .card .img {
+  width: 100%;
+  height: 100%;
+}
+body .destination_inspiration .contain_inspiration .card .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+body .destination_inspiration .contain_inspiration .card .card_text {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.389);
+  z-index: 10;
+  bottom: 0;
+  transform: translateY(100px);
+  transition: all ease 0.5s;
+  padding: 2rem 1rem;
+}
+body .destination_inspiration .contain_inspiration .card .card_text p {
+  color: white;
+}
+body .destination_inspiration .contain_inspiration .card1 {
+  grid-area: card1;
+}
+body .footer {
+  border-top: 1px solid rgba(25, 34, 68, 0.0784313725);
+  width: 100%;
+  height: 100px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+}
+body .footer .logo {
+  height: 100%;
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .footer .logo h1 {
+  font-size: 28px;
+  color: rgba(25, 34, 68, 0.6705882353);
+  margin-right: 40px;
+  font-family: "Fredoka One", cursive;
+}
+body .footer ul {
+  list-style: none;
+  width: 23%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "Quicksand", sans-serif;
+}
+body .footer ul li a {
+  text-decoration: none;
+  color: rgba(25, 34, 68, 0.6705882353);
+}
+body .footer .social {
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+body .footer .social span {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=style.css.map */

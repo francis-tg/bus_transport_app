@@ -12,7 +12,7 @@ class View extends Router
 
     static $file_path = "../views/";
 
-    static $file_ext = ".shadow.php";
+    static $file_ext = ".shadow.html";
 
     public static function render($file, $data = array())
     {

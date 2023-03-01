@@ -13,6 +13,10 @@ class Trajet extends Destination{
         return $this->addDestination($data);
     }
     function Home(){
-        View::render("admin/trajet",["title"=>"Admin | Trajets"]);
+        $villes_depart = $this->select("depart", ["*"]);
+        $villes_arrive = $this->select("destination", ["*"]);
+        View::render("admin/trajet",["title"=>"Admin | Trajets", 
+        "villes_depart"=>$villes_depart,
+        "villes_arrive"=>$villes_arrive]);
     }
 }

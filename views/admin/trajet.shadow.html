@@ -1,0 +1,137 @@
+{% extends ../views/layouts/main.shadow.html %}
+{% block title %}{{ $title }}{% endblock %}
+{% block content %}
+
+<div class="container-sm container-fluid">
+   
+   
+      <div class="row">
+        <div class="col-md-5 shadow-lg p-4 m-3">
+            <div class="mb-3">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addLeaved"><i class="fas fa-plus"></i> Ajouter une ville de départ
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped-columns
+                table-bordered">
+                    <thead>
+                        <caption>Trajet</caption>
+                        <tr>
+                            <th>Ville de Départ</th>
+                            <th>Heure de départ</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        
+                        {% foreach ($villes_depart as $depart): %}
+                        <tr>
+                            <td scope="row">{{$depart["ville"]}}</td>
+                            <td>{{$depart["leave_time"]}}</td>
+                        
+                        </tr>
+                        {% endforeach %}
+                    </tbody>
+                    <tfoot>
+            
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-5 shadow-lg p-4 m-3">
+            <div class="mb-3">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addArrived"><i class="fas fa-plus"></i> Ajouter une
+                    ville d'arrivée
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped-columns
+                table-bordered">
+                    <thead>
+                        <caption>Trajet</caption>
+                        <tr>
+                            <th>Destination</th>
+                            <th>Heure de d'arrivée</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        {% foreach ($villes_arrive as $arrive): %}
+                        <tr>
+                            <td scope="row">{{$arrive["ville"]}}</td>
+                            <td>{{$arrive["reached_time"]}}</td>
+                        
+                        </tr>
+                        {% endforeach %}
+                    </tbody>
+                    <tfoot>
+            
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+      </div>
+</div>
+
+<div class="modal fade" id="addLeaved" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="addLeavedId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addLeavedId">Ajouter une ville de départ</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/api/add-depart">
+                        <div class="form-group">
+                    <label> Nom de ville </label>
+                    <input type="text" name="ville" id="depart" class="form-control" placeholder="Ville de départ">
+                </div>
+                <div class="form-group">
+                    <label>Heure Départ</label>
+                    <input type="time" name="leave_time" id="heure_depart" class="form-control" placeholder="Heure de départ">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addArrived" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog"
+    aria-labelledby="addArrivedId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addArrivedId">Ajouter une ville d'arrivée</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/api/add-dest">
+                    <div class="form-group">
+                        <label> Nom de ville </label>
+                        <input type="text" name="ville" id="arrive" class="form-control" placeholder="Ville d'arrivé">
+                    </div>
+                    <div class="form-group">
+                        <label>Heure d'arrivée</label>
+                        <input type="time" name="reached_time" id="heure_arrive" class="form-control"
+                            placeholder="Heure d'arrivée">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Place to the bottom of scripts -->
+<script>
+    const myModal = new bootstrap.Modal(document.getElementById('addTrajet'), options)
+</script>
+{% endblock %}
