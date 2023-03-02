@@ -25,6 +25,7 @@ $router->post("/add-user", User::class . "::addUser");
 $router->post("/edit-user", User::class . "::editUser");
 $router->post("/api/add-depart", Trajet::class."::addDepart");
 $router->post("/api/add-dest", Trajet::class . "::addDest");
+$router->post("/api/add-trajet", Trajet::class . "::addTrajet");
 $router->post("/api/login", User::class . "::login");
 $router->get("/user/set-pwd", function () {
 

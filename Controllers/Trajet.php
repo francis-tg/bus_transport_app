@@ -19,4 +19,7 @@ class Trajet extends Destination{
         "villes_depart"=>$villes_depart,
         "villes_arrive"=>$villes_arrive]);
     }
+    function addTrajet(array $data){
+        return $this->createTrajet($data);
+    }
 }
