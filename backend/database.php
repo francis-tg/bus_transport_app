@@ -29,13 +29,13 @@ class database extends ORM
         $this->createRelationship("user", "id_role", "role", "id");
         $this->createTable("destination", [
             'id' => 'INT(6) AUTO_INCREMENT PRIMARY KEY',
-            'ville' => 'VARCHAR(30) NOT NULL',
+            'dest_ville' => 'VARCHAR(30) NOT NULL',
             'reached_time' => 'VARCHAR(30) NOT NULL',
             'createdAt' => 'DATETIME(6) DEFAULT CURRENT_TIMESTAMP NOT NULL',
         ]);
         $this->createTable("depart", [
             'id' => 'INT(6) AUTO_INCREMENT PRIMARY KEY',
-            'ville' => 'VARCHAR(30) NOT NULL',
+            'leave_ville' => 'VARCHAR(30) NOT NULL',
             'leave_time' => 'VARCHAR(30) NOT NULL',
             'createdAt' => 'DATETIME(6) DEFAULT CURRENT_TIMESTAMP NOT NULL',
         ]);

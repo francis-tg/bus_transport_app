@@ -25,7 +25,7 @@
                         
                         {% foreach ($villes_depart as $depart): %}
                         <tr>
-                            <td scope="row">{{$depart["ville"]}}</td>
+                            <td scope="row">{{$depart["leave_ville"]}}</td>
                             <td>{{$depart["leave_time"]}}</td>
                         
                         </tr>
@@ -56,7 +56,7 @@
                     <tbody class="table-group-divider">
                         {% foreach ($villes_arrive as $arrive): %}
                         <tr>
-                            <td scope="row">{{$arrive["ville"]}}</td>
+                            <td scope="row">{{$arrive["dest_ville"]}}</td>
                             <td>{{$arrive["reached_time"]}}</td>
                         
                         </tr>
@@ -81,17 +81,20 @@
                         <caption>Trajet</caption>
                         <tr>
                             <th>Départ</th>
-                            <th>Heure de d'arrivée</th>
+                            <th>Heure de départ</th>
                             <th>Destination</th>
                             <th>Heure de d'arrivée</th>
                             <th>Prix</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        {% foreach ($villes_arrive as $arrive): %}
+                        {% foreach ($trajets as $trajet): %}
                         <tr>
-                            <td scope="row">{{$arrive["ville"]}}</td>
-                            <td>{{$arrive["reached_time"]}}</td>
+                            <td scope="row">{{$trajet["leave_ville"]}}</td>
+                            <td>{{$trajet["leave_time"]}}</td>
+                            <td scope="row">{{$trajet["dest_ville"]}}</td>
+                            <td>{{$trajet["reached_time"]}}</td>
+                            <td>{{$trajet["prix"]}}</td>
         
                         </tr>
                         {% endforeach %}
@@ -116,7 +119,7 @@
                     <form method="post" action="/api/add-depart">
                         <div class="form-group">
                     <label> Nom de ville </label>
-                    <input type="text" name="ville" id="depart" class="form-control" placeholder="Ville de départ">
+                    <input type="text" name="leave_ville" id="depart" class="form-control" placeholder="Ville de départ">
                 </div>
                 <div class="form-group">
                     <label>Heure Départ</label>
@@ -146,7 +149,7 @@
                 <form method="post" action="/api/add-dest">
                     <div class="form-group">
                         <label> Nom de ville </label>
-                        <input type="text" name="ville" id="arrive" class="form-control" placeholder="Ville d'arrivé">
+                        <input type="text" name="dest_ville" id="arrive" class="form-control" placeholder="Ville d'arrivé">
                     </div>
                     <div class="form-group">
                         <label>Heure d'arrivée</label>
@@ -178,7 +181,7 @@
                         <label> Ville de départ </label>
                         <input type="text" name="ville_depart" list="ville_depart"  class="form-control" placeholder="Ville de départ">
                         <datalist id="ville_depart">{% foreach ($villes_depart as $depart): %}
-                        <option value="{{$depart["ville"]}}"></option>
+                        <option value="{{$depart["leave_ville"]}}"></option>
                         {% endforeach %}
 
                         </datalist>
@@ -189,7 +192,7 @@
                             placeholder="Heure d'arrivée">
                             <datalist id="ville_arrive">
                                 {% foreach ($villes_arrive as $arrive): %}
-                                <option value="{{$arrive["ville"]}}"></option>
+                                <option value="{{$arrive["dest_ville"]}}"></option>
                                 {% endforeach %}
                             </datalist>
                     </div>

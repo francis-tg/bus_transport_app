@@ -73,12 +73,20 @@ class ORM extends db
      * @param string $limit
      * @return mixed
      */
-    public function select(string $table, array $fields=["*"], string $where = "", string $order_by = "", string $limit = "", array $include)
+    public function select(string $table, array $fields=["*"], string $where = "", string $order_by = "", string $limit = "", array $include=[])
     {
         $query = "SELECT " . implode(", ", $fields) . " FROM " . $table;
+        if(count($include) >0){
+            $joins = "";
+            foreach ($include as $r_table => $r_column) {
+                $joins .=" JOIN $r_table ON $table".".".$r_column." = ".$r_table.".id ";
+            }
+            $query .= $joins;
+        }
         if ($where != "") {
             $query .= " WHERE " . $where;
         }
+        
         if ($order_by != "") {
             $query .= " ORDER BY " . $order_by;
         }
@@ -97,7 +105,7 @@ class ORM extends db
      * @param string $order_by
      * @return mixed
      */
-    public function selectOne(string $table, array $fields=["*"], string $where = "", string $order_by = "",){
+    public function selectOne(string $table, array $fields=["*"], string $where = "", string $order_by = "",array $include){
         $limit = 1;
         $query = "SELECT " . implode(", ", $fields) . " FROM " . $table;
         if ($where != "") {
