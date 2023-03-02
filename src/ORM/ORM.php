@@ -65,15 +65,15 @@ class ORM extends db
         $this->pdo->exec($query);
     }
     /**
-     * Summary of SELECT
-     * @param mixed $table
-     * @param mixed $fields
-     * @param mixed $where
-     * @param mixed $order_by
-     * @param mixed $limit
+     * Summary of select
+     * @param string $table
+     * @param array $fields
+     * @param string $where
+     * @param string $order_by
+     * @param string $limit
      * @return mixed
      */
-    public function select($table, $fields, $where = "", $order_by = "", $limit = "")
+    public function select(string $table, array $fields=["*"], string $where = "", string $order_by = "", string $limit = "", array $include)
     {
         $query = "SELECT " . implode(", ", $fields) . " FROM " . $table;
         if ($where != "") {
@@ -88,6 +88,29 @@ class ORM extends db
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    /**
+     * Summary of selectOne
+     * @param string $table
+     * @param array $fields
+     * @param string $where
+     * @param string $order_by
+     * @return mixed
+     */
+    public function selectOne(string $table, array $fields=["*"], string $where = "", string $order_by = "",){
+        $limit = 1;
+        $query = "SELECT " . implode(", ", $fields) . " FROM " . $table;
+        if ($where != "") {
+            $query .= " WHERE " . $where;
+        }
+        if ($order_by != "") {
+            $query .= " ORDER BY " . $order_by;
+        }
+        $query .= " LIMIT " . $limit;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+
     }
     /**
      * Summary of INSERT
