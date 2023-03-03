@@ -9,7 +9,7 @@ class User extends ORM implements UserInterface
 {
     public function addUser(array $user)
     {
-        print_r($user);
+        
         if (isset($user["nom"]) && isset($user["prenom"]) && isset($user["id_role"])) {
             $user["password"] = md5($user["password"]);
             $this->insert("user", $user);
@@ -38,26 +38,11 @@ class User extends ORM implements UserInterface
             header("Location: " . $_SERVER["HTTP_REFERER"]);
         }
     }
-    public function login(array $user_data)
+    public function logUser(array $user_data, $callback)
     {
         if (isset($user_data["phone"])) {
-            $user = $this->select("user", "*", ["phone" => $user_data["phone"]]);
-            if (array_count_values($user) > 0) {
-                if (isset($user_data["password"])) {
-                    if ($user_data["password"] === md5($user_data["password"])) {
-                        print("login successful");
-                    } else {
-                        # code...
-                        print("password wrong");
-                    }
-
-                } else {
-                    header("Location:/user/set-password");
-                }
-            } else {
-                print("user not found...");
-            }
-
+            $user = $this->select("user", ["*"], "phone="."'".$user_data["phone"]."'");
+            return call_user_func_array($callback, [array_merge($user_data,$user)]);
         }
     }
     public function setPwd(array $user_data)

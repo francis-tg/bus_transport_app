@@ -9,7 +9,7 @@ class db {
     public $message;
     const DB_NAME = "transport_db";
     const USERNAME = "root";
-    const PWD = "cyberlyne";
+    const PWD = "";
     const HOST = "127.0.0.1";
     
 
