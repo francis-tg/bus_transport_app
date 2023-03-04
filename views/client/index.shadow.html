@@ -1,407 +1,83 @@
 {% extends ../views/layouts/client.shadow.html %}
 {% block title %}{{ $title }}{% endblock %}
-    {% block content %}
-    <div class="loader">
-        <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
+{% block content %}
+<nav class="navbar d-flex justify-content-between navbar-dark bg-gray-700 align-content-center">
+    <div class="navbar-brand">
+        <a href="#" class="text-white">
+            Travel Booking
+        </a>
     </div>
+    <ul class="list-unstyled">
+        <li class="nav-item"><a href="#" class="btn btn-outline-dark text-white">Connection</a></li>
+    </ul>
+
+</nav>
+<main>
     <header>
-        <nav>
-            <div class="logo">Reservation <span>Ticket</span></div>
-
-            <ul>
-                <li><a href="#">Home</a></li>
-
-            </ul>
-            <div class="buttons">
-                <button class="btn_login">Connectez-vous</button>
-                <button class="btn_sigin">Créer un compte</button>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h2>
+                        Reserver vos tickets la veille
+                    </h2>
+                    <div class="float-rigth">
+                        <button class="btn btn-outline-dark">Reserver maintenant</button>
+                    </div>
+                </div>
+                <div class="header-img">
+                    <img src="/img/ImgBg.png" alt="Header">
+                </div>
             </div>
-        </nav>
-
+        </div>
     </header>
-
-
-
-    <div class="hero">
-
-        <div class="left">
-
-            <div class="center">
-                <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-                <p>With Booking travel, you can travel around the world at a lower cost. <br> it is a solution that has
-                    been designed by Cameroonian developers in order to help the population through the reduction of
-                    travel costs whether by bus, plane or train</p>
-                <button>Reserver maintenant !</button>
-
-            </div>
+    <section id="reservation" class="container">
+        <div class="field">
+            <input type="text" list="depart" id="_depart" onchange="changeState(e)" class="form-control" placeholder="Ville de départ">
+            <datalist id="depart">
+                {% foreach ($villes_depart as $depart): %}
+                <option value="{{$depart["leave_ville"]}}"></option>
+                {% endforeach %}
+            </datalist>
         </div>
-        <div class="right">
-            <div class="img">
-                <img src="./img/ImgBg.png" alt="">
-            </div>
-
+        <div class="field">
+            <input type="text" list="arrive" id="_arrive" onchange="changeState(e)" class="form-control" placeholder="Ville d'arrive">
+            <datalist id="arrive">
+                {% foreach ($villes_arrive as $arrive): %}
+                <option value="{{$arrive["dest_ville"]}}"></option>
+                {% endforeach %}
+            </datalist>
         </div>
-
-        <div class="book_section">
-            <div class="inner_book">
-
-                <input type="text" list="depart" placeholder="Ville de départ">
-                <datalist id="depart">
-                    {% foreach ($villes_depart as $depart): %}
-                   <option value="{{$depart["ville"]}}"></option>
-                    {% endforeach %}
-                </datalist>
-                <input type="text" list="arrive" placeholder="Ville d'arrive">
-                <datalist id="arrive">
-                    {% foreach ($villes_arrive as $arrive): %}
-                    <option  value="{{$arrive["ville"]}}"></option>
-                    {% endforeach %}
-                </datalist>
-                <input type="datetime-local" placeholder="Date de départ">
-                <div class="book-btn">
-                    <a href="#"><i class="fas fa-car fa-2x"></i></a>
-                </div>
-
-            </div>
+       <div class="field">
+        <input type="datetime-local" class="form-control" placeholder="Date de départ">
+        
+       </div>
+       <div class="field">
+        <div class="book-btn">
+            <a href="#" onclick="sb()" class="btn btn-dark">Reserver</a>
         </div>
-
-
-    </div>
-
-    <div class="vide"></div>
-
-
-    <div class="contain_item">
-        <div class="item">
-            <div class="header">
-                <div class="left"><img src="./img/card2.jpg" alt="">
-                    <h1>Love travel</h1>
-                </div>
-                <div class="right"><span>VIP</span></div>
-            </div>
-            <div class="trajet">
-                <span class="heure_depart">4h</span><span class="tiret"></span><span class=" heure_arrive ">4h</span>
-                <span class="tiret"></span> <span class="duree">8h</span>
-                <button class="prix_trajet"> 750 Fcfa</button>
-            </div>
-        </div>
-        <div class="item">
-            <div class="header">
-                <div class="left"><img src="#" alt="">
-                    <h1>Love travel</h1>
-                </div>
-                <div class="right"><span>VIP</span></div>
-            </div>
-            <div class="trajet">
-                <span class="heure_depart">4h</span><span class="tiret"></span><span class=" heure_arrive ">4h</span>
-                <span class="tiret"></span> <span class="duree">8h</span>
-                <button class="prix_trajet"> 750 Fcfa</button>
-            </div>
-
-
-            <span class="more">Voir +</span>
-        </div>
-        <div class="item">
-            <div class="header">
-                <div class="left"><img src="#" alt="">
-                    <h1>Love travel</h1>
-                </div>
-                <div class="right"><span>VIP</span></div>
-            </div>
-            <div class="trajet">
-                <span class="heure_depart">4h</span><span class="tiret"></span><span class=" heure_arrive ">4h</span>
-                <span class="tiret"></span> <span class="duree">8h</span>
-                <button class="prix_trajet"> 750 Fcfa</button>
-            </div>
-            <span class="more">Voir +</span>
-
-        </div>
-        <div class="item">
-            <div class="header">
-                <div class="left"><img src="#" alt="">
-                    <h1>Love travel</h1>
-                </div>
-                <div class="right"><span>VIP</span></div>
-            </div>
-            <div class="trajet">
-                <span class="heure_depart">4h</span><span class="tiret"></span><span class=" heure_arrive ">4h</span>
-                <span class="tiret"></span> <span class="duree">8h</span>
-                <button class="prix_trajet"> 750 Fcfa</button>
-            </div>
-            <span class="more">Voir +</span>
-
-        </div>
-        <div class="item">
-            <div class="header">
-                <div class="left"><img src="#" alt="">
-                    <h1>Love travel</h1>
-                </div>
-                <div class="right"><span>VIP</span></div>
-            </div>
-            <div class="trajet">
-                <span class="heure_depart">4h</span><span class="tiret"></span><span class=" heure_arrive ">4h</span>
-                <span class="tiret"></span> <span class="duree">8h</span>
-                <button class="prix_trajet"> 750 Fcfa</button>
-            </div>
-            <span class="more">Voir +</span>
-
-        </div>
-
-    </div>
-
-
-    <div class="popular_destination">
-
-        <div class="header">
-            <span>
-                My destination
-            </span>
-            <h1>Our favorite destinations</h1>
-        </div>
-
-        <div class="slider_container swiper">
-
-            <div class="slide-content">
-                <div class="card-wrapper swiper-wrapper">
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <img src="./img/card2.jpg" alt="">
-                        </div>
-
-                        <div class="card-content">
-
-                            <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
-                            <h2>cite de paradi</h2>
-                            <div class="note">
-                                <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
-                                <p><span>$32 days</span></p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-
-                            <img src="./img/card1.jpg" alt="">
-
-
-                        </div>
-
-                        <div class="card-content">
-
-
-                            <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
-                            <h2>cite de paradi</h2>
-                            <div class="note">
-                                <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
-                                <p><span>$32 days</span></p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <img src="./img/card3.jpg" alt="">
-                        </div>
-
-                        <div class="card-content">
-
-
-                            <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
-                            <h2>cite de paradi</h2>
-                            <div class="note">
-                                <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
-                                <p><span>$32 days</span></p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <img src="./img/card4.jpg" alt="">
-                        </div>
-
-                        <div class="card-content">
-
-
-                            <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
-                            <h2>cite de paradi</h2>
-                            <div class="note">
-                                <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
-                                <p><span>$32 days</span></p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <img src="./img/card2.jpg" alt="">
-                        </div>
-
-                        <div class="card-content">
-
-
-                            <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
-                            <h2>cite de paradi</h2>
-                            <div class="note">
-                                <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
-                                <p><span>$32 days</span></p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <img src="./img/card4.jpg" alt="">
-                        </div>
-
-                        <div class="card-content">
-
-
-
-                            <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
-                            <h2>cite de paradi</h2>
-                            <div class="note">
-                                <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
-                                <p><span>$32 days</span></p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-
-
-                            <img src="./img/card1.jpg" alt="">
-
-
-                        </div>
-
-                        <div class="card-content">
-
-                            <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
-                            <h2>cite de paradi</h2>
-                            <div class="note">
-                                <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
-                                <p><span>$32 days</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div> -->
-
-        </div>
-
-
-    </div>
-
-    <div class="service">
-        <div class="left">
-
-            <div class="image">
-                <img src="./img/bgService.jpg" alt="">
-            </div>
-
-
-        </div>
-        <div class="right">
-
-            <div class="center">
-
-                <div class="header">
-                    <span>Best services</span>
-                    <h1>Feel the best experience with our rental deals</h1>
-                </div>
-                <div class="content">
-                    <div class="card">
-                        <div class="image">
-                            <i class="fa-solid fa-window-restore"></i>
-                        </div>
-                        <div class="text">
-                            <h1>Deals for every budget</h1>
-                            <p>incredible prices on hate is . flights cars. <br> and package worlwide</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="image">
-                            <i class="fa-solid fa-layer-group"></i>
-                        </div>
-                        <div class="text">
-                            <h1>Best price guaranteed</h1>
-                            <p>Find a lower price ? we'll refund you 100% of the difference</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="image">
-                            <i class="fa-solid fa-folder-minus"></i>
-                        </div>
-                        <div class="text">
-                            <h1>Support 24/7</h1>
-                            <p>Find a lower price we'll refund you 100% of the difference</p>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-            </div>
-        </div>
-    </div>
-
-    <div class="destination_inspiration">
-        <h1>Be Inspired For The Next Vacation</h1>
-        <div class="contain_inspiration">
-            <div class=" card card1">
-                <div class="img"><img src="./img/card1.jpg" alt=""></div>
-                <div class="card_text">
-
-                    <p>I am here</p>
-                </div>
-            </div>
-            <div class=" card card2">
-                <div class="img"><img src="./img/card2.jpg" alt=""></div>
-                <div class="card_text">
-
-                    <p>I am here</p>
-                </div>
-            </div>
-            <div class=" card card3">
-                <div class="img"><img src="./img/card3.jpg" alt=""></div>
-                <div class="card_text">
-
-                    <p>I am here</p>
-                </div>
-            </div>
-            <div class=" card card4">
-                <div class="img"><img src="./img/card4.jpg" alt=""></div>
-                <div class="card_text">
-
-                    <p>I am here</p>
-                </div>
-            </div>
-            <div class=" card card5">
-                <div class="img"><img src="img/card3.jpg" alt=""></div>
-                <div class="card_text">
-
-                    <p>I am here</p>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-
-
+       </div>
+    </section>
+</main>
+<script>
+    const state = {
+            depart: "",
+            arrive: ""
+        }
+    function changeState(e){
+        const getKey = Object.keys(state);
+        getKey.forEach(k=>{
+            if(k.match("/depart/")){
+                return state.depart = e.target.value;
+            }
+            if (k.match("/arrive/")) {
+                return state.arrive = e.target.value;
+            }
+        })
+    }
+
+    function sb (){
+        console.log(state)
+    }
     
-
+</script>
 {% endblock %}
-
-
-</html>
-

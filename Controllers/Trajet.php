@@ -15,7 +15,7 @@ class Trajet extends Destination{
     function Home(){
         $villes_depart = $this->select("depart", ["*"]);
         $villes_arrive = $this->select("destination", ["*"]);
-        $getTrajet = $this->select("trajet", ["*"], "", "", "", ["depart" => "id_depart", "destination" => "id_dest"]);
+        $getTrajet = $this->select("trajet", ["*"],include:["depart" => "id_depart", "destination" => "id_dest"]);
         View::render("admin/trajet",["title"=>"Admin | Trajets", 
         "villes_depart"=>$villes_depart,
         "villes_arrive"=>$villes_arrive,
@@ -23,5 +23,14 @@ class Trajet extends Destination{
     }
     function addTrajet(array $data){
         return $this->createTrajet($data);
+    }
+    function getDepart(){
+        return printf(json_encode($this->select("depart", ["*"])));
+
+    }
+    function getArrive(){
+        
+        return printf(json_encode($this->select("destination", ["*"])));
+
     }
 }

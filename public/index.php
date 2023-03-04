@@ -7,6 +7,14 @@ use Cisco\Shadow\Controllers\Admin;
 use Cisco\Shadow\Controllers\Trajet;
 use Cisco\Shadow\ORM\ORM;
 use Cisco\Shadow\View;
+function applyCorsHeaders(string $origin="*")
+{
+    header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type, Accept');
+}
+
 
 $db = new ORM();
 
@@ -24,6 +32,9 @@ $router->post("/edit-user", User::class . "::editUser");
 $router->post("/api/add-depart", Trajet::class."::addDepart");
 $router->post("/api/add-dest", Trajet::class . "::addDest");
 $router->post("/api/add-trajet", Trajet::class . "::addTrajet");
+$router->get("/api/get-depart", Trajet::class . "::getDepart");
+$router->get("/api/get-arrive", Trajet::class . "::getArrive");
+
 $router->post("/api/login", Auth::class."::auth");
 $router->get("/user/set-pwd", function () {
 
@@ -38,5 +49,7 @@ $router->get("/logout", function () {
 $router->HandlerNotFound(function () {
     echo "Not found";
 });
+
+applyCorsHeaders("*");
 
 $router->run();

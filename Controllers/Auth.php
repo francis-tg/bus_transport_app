@@ -2,6 +2,7 @@
 namespace Cisco\Shadow\Controllers;
 use Cisco\Shadow\flash\Messages;
 use Cisco\Shadow\Request\User;
+use Cisco\Shadow\Router;
 use Cisco\Shadow\View;
 
 
@@ -12,33 +13,35 @@ class Auth extends User
         View::render("login");
     }
     function auth(array $data){
-        
-
         $this->logUser($data, function ($user) {
+            $msg = new Messages();
             if (array_count_values($user) > 0) {
-                $msg = new Messages();
                 if (isset($user[0]["password"])) {
                     if ($user[0]["password"] === md5($user["password"])) {
                         $msg->clean();
 
-                        print("login success");
+                        Router::redirect("/admin");
                     } else {
                         
                         # code...
                         $msg->clean();
                         $msg->error("Password wrong");
-                    
-                        header("Location: " . $_SERVER["HTTP_REFERER"]);
+                        // header("Location: " . $_SERVER["HTTP_REFERER"]);
                         //$msg->clean();
+                        Router::redirect(goback: true);
                     }
 
                 } else {
-                    var_dump($user);
-
-                    //header("Location:/user/set-password");
+                   $msg->clean();
+                    $msg->error("Infomation incorrect pour le compte " . $user['phone']);
+                    Router::redirect(goback:true);
                 }
             } else {
-                print("user not found...");
+                $msg->clean();
+                $msg->error("Infomation incorrect pour le compte ".$user['phone']);
+                Router::redirect(goback:true);
+
+
             }
 
         });

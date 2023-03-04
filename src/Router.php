@@ -69,4 +69,12 @@ class Router
         ]);
         
     }
+    static function redirect(string $path="",bool $goback=false){
+        if(!$goback){
+            return header("Location: " . $path);
+        }else {
+            return header("Location: " . $_SERVER["HTTP_REFERER"]);
+
+        }
+    }
 }
