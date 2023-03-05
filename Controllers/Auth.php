@@ -1,5 +1,6 @@
 <?php
 namespace Cisco\Shadow\Controllers;
+use Cisco\Shadow\crypto\Hash;
 use Cisco\Shadow\flash\Messages;
 use Cisco\Shadow\Request\User;
 use Cisco\Shadow\Router;
@@ -40,10 +41,25 @@ class Auth extends User
                 $msg->clean();
                 $msg->error("Infomation incorrect pour le compte ".$user['phone']);
                 Router::redirect(goback:true);
-
-
             }
 
         });
+    }
+    function userAuth(array $data){
+        extract($data);
+        if(isset($username) && !empty($username) && isset($password) && !empty($password)){
+            $user = $this->selectOne("user", ["nom","phone","nom_role"],[["phone"=>$username],["nom_role"=>"client"],["password"=>md5($password)]],include:["role"=>"id_role"]);
+            if(!$user || !isset($user)){
+                Router::json(401, "Information incorrect");
+            }else{
+                $token = Hash::Cipher($user["phone"], "cyberlyne");
+
+                Router::json(200, [["token"=>$token],$user]);
+            }
+        }
+        else{
+            Router::send(400, "Veuillez renseigner les champs...");
+        }
+
     }
 }

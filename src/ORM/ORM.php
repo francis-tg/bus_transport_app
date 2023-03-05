@@ -1,6 +1,7 @@
 <?php
 
 namespace Cisco\Shadow\ORM;
+use Cisco\Shadow\cli\Cli;
 session_start();
 
 use PDO;
@@ -62,6 +63,7 @@ class ORM extends db
      */
     function addColumn(string $table_name, string $field_name, string  $value){
         $query = "ALTER TABLE $table_name ADD IF NOT EXISTS $field_name $value";
+        Cli::consoleLog("info", $query);
         $this->pdo->exec($query);
     }
     /**
@@ -95,26 +97,49 @@ class ORM extends db
         }
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
+        Cli::consoleLog("info", $query);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     /**
      * Summary of selectOne
      * @param string $table
      * @param array $fields
-     * @param string $where
+     * @param array $where
      * @param string $order_by
+     * @param array $include
      * @return mixed
      */
-    public function selectOne(string $table, array $fields=["*"], string $where = "", string $order_by = "",array $include){
+    public function selectOne(string $table, array $fields=["*"], array $where=[], string $order_by = "",array $include=[]){
         $limit = 1;
         $query = "SELECT " . implode(", ", $fields) . " FROM " . $table;
-        if ($where != "") {
-            $query .= " WHERE " . $where;
+        if (count($include) > 0) {
+            $joins = "";
+            foreach ($include as $r_table => $r_column) {
+                $joins .= " JOIN $r_table ON $table" . "." . $r_column . " = " . $r_table . ".id ";
+            }
+            $query .= $joins;
+        }
+
+        if (array_keys($where)>0) {
+            $joins_where = "";
+            
+
+            $shift_array = array_shift($where);
+
+            $extractfirst = array_keys($shift_array)[0];
+           
+            $joins_where .= " WHERE $extractfirst = '" . $shift_array[$extractfirst] . "'";
+            foreach ($where as $column => $value) {
+                $joins_where .= " AND ".array_keys($value)[0]." = '".array_values($value)[0]."'";
+            }
+            $query .= $joins_where;
         }
         if ($order_by != "") {
             $query .= " ORDER BY " . $order_by;
         }
         $query .= " LIMIT " . $limit;
+        Cli::consoleLog("info", $query);
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
@@ -130,6 +155,8 @@ class ORM extends db
     {
         $query = "INSERT INTO " . $table . " (" . implode(", ", array_keys($data)) . ") VALUES (:" . implode(", :", array_keys($data)) . ")";
         $stmt = $this->pdo->prepare($query);
+        Cli::consoleLog("info", $query);
+
         return $stmt->execute($data);
     }
 
@@ -152,6 +179,8 @@ class ORM extends db
         }
         $query .= implode(", ", $query_parts) . " WHERE " . $where;
         $stmt = $this->pdo->prepare($query);
+        Cli::consoleLog("info", $query);
+
         return $stmt->execute($data);
     }
     /**
@@ -164,6 +193,8 @@ class ORM extends db
     {
         $query = "DELETE FROM " . $table . " WHERE " . $where;
         $stmt = $this->pdo->prepare($query);
+        Cli::consoleLog("info", $query);
+
         return $stmt->execute();
     }
 

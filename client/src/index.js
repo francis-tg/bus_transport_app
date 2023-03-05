@@ -17,7 +17,7 @@ root.render(
       <Routes>
         <Route path='/' element={<App />}></Route>
         <Route path='/login' element={<Login />} />
-        <Route path='/login' element={<Register />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>

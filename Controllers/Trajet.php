@@ -29,8 +29,6 @@ class Trajet extends Destination{
 
     }
     function getArrive(){
-        
         return printf(json_encode($this->select("destination", ["*"])));
-
     }
 }

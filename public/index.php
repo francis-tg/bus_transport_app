@@ -1,6 +1,7 @@
 <?php
 use Cisco\Shadow\Controllers\Auth;
 use Cisco\Shadow\Controllers\Client;
+use Cisco\Shadow\Request\User;
 require_once '../vendor/autoload.php';
 require("../backend/index.php");
 use Cisco\Shadow\Controllers\Admin;
@@ -36,6 +37,8 @@ $router->get("/api/get-depart", Trajet::class . "::getDepart");
 $router->get("/api/get-arrive", Trajet::class . "::getArrive");
 
 $router->post("/api/login", Auth::class."::auth");
+$router->post("/api/client-login", Auth::class . "::userAuth");
+
 $router->get("/user/set-pwd", function () {
 
 });

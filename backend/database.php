@@ -66,6 +66,12 @@ class database extends ORM
                 "nom_role" => "personnel",
             ]);
         }
+        if (!$this->select("role", ["*"], "nom_role='client'")) {
+            $this->insert("role", [
+                "nom_role" => "client",
+            ]);
+        }
+
 
         $this->addColumn("user", "password", "VARCHAR(60)");
     }

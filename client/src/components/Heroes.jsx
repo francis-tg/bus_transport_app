@@ -1,6 +1,5 @@
 import React from "react";
 import DatalistInput from "react-datalist-input";
-import "react-datalist-input/dist/styles.css";
 
 function Heroes() {
   const [depart, setDepart] = React.useState([]);
@@ -10,6 +9,7 @@ function Heroes() {
     dest: "",
     dateDepart: ""
   });
+  console.log(ticket);
   async function fecthDepartData() {
     await fetch(
       `${window.location.protocol}//${window.location.hostname}:86/api/get-depart`,
@@ -63,7 +63,6 @@ function Heroes() {
   React.useEffect(() => {
     fecthDepartData();
     fecthDestData();
-    console.log(depart);
     return () => {};
   }, []);
 
@@ -84,7 +83,7 @@ function Heroes() {
             <DatalistInput
               placeholder='Chocolate'
               label='Ville de départ'
-              inputProps={{["className"]: "input input-bordered"}}
+              inputProps={{className: "input input-bordered"}}
               onSelect={(item) =>
                 setTicket((prevState) => ({
                   ...prevState,
@@ -97,7 +96,7 @@ function Heroes() {
             <DatalistInput
               placeholder='Chocolate'
               label='Destination'
-              inputProps={{["className"]: "input input-bordered"}}
+              inputProps={{className: "input input-bordered"}}
               onSelect={(item) =>
                 setTicket((prevState) => ({
                   ...prevState,

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Cisco\Shadow;
+use Cisco\Shadow\header\Headers;
 
 class Router
 {
@@ -77,4 +78,14 @@ class Router
 
         }
     }
+
+    static function send(int $statusCode, mixed $data){
+        header("HTTP/1.1 ".$statusCode);
+        printf($data);
+    }
+    static function json(int $statusCode, mixed $data){
+        header("HTTP/1.1 ".$statusCode);
+        printf(json_encode($data));
+    }
+    
 }
