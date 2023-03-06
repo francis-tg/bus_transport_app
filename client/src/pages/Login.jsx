@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {json, Link} from "react-router-dom";
 import {toast} from "react-toastify";
 import logImg from "../img/loginbg.jpg";
 function Login() {
@@ -30,8 +30,11 @@ function Login() {
         },
         body: urlencoded
       }
-    ).then((response) => {
+    ).then(async (response) => {
       if (response.status === 200) {
+        const data = await response.json();
+        sessionStorage.setItem("session", data[0].token);
+        sessionStorage.setItem("userData", JSON.stringify(data));
         toast.success("User connect succesfully");
       } else toast.error("Informations incorrects");
     });

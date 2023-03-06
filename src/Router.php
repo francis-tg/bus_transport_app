@@ -34,6 +34,7 @@ class Router
             'method' => $method,
             'handler' => $handler,
         ];
+
     }
 
     public function run()

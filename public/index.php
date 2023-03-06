@@ -1,6 +1,7 @@
 <?php
 use Cisco\Shadow\Controllers\Auth;
 use Cisco\Shadow\Controllers\Client;
+use Cisco\Shadow\dotenv\Env;
 use Cisco\Shadow\Request\User;
 require_once '../vendor/autoload.php';
 require("../backend/index.php");
@@ -13,10 +14,11 @@ function applyCorsHeaders(string $origin="*")
     header("Access-Control-Allow-Origin: $origin");
     header("Access-Control-Allow-Credentials: true");
     header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type, Accept');
+    header('Access-Control-Allow-Headers: Content-Type, Accept,Authorization');
 }
 
-
+applyCorsHeaders("*");
+new Env();
 $db = new ORM();
 
 $router = new View();
@@ -35,9 +37,12 @@ $router->post("/api/add-dest", Trajet::class . "::addDest");
 $router->post("/api/add-trajet", Trajet::class . "::addTrajet");
 $router->get("/api/get-depart", Trajet::class . "::getDepart");
 $router->get("/api/get-arrive", Trajet::class . "::getArrive");
+$router->get("/api/trajet-all", Trajet::class . "::getTrajet");
+$router->get("/api/trajet", Trajet::class . "::getTrajetById");
 
 $router->post("/api/login", Auth::class."::auth");
 $router->post("/api/client-login", Auth::class . "::userAuth");
+$router->post("/api/check-user", Auth::class . "::checkUser");
 
 $router->get("/user/set-pwd", function () {
 
@@ -53,6 +58,6 @@ $router->HandlerNotFound(function () {
     echo "Not found";
 });
 
-applyCorsHeaders("*");
+
 
 $router->run();

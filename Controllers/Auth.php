@@ -1,6 +1,7 @@
 <?php
 namespace Cisco\Shadow\Controllers;
 use Cisco\Shadow\crypto\Hash;
+use Cisco\Shadow\dotenv\Env;
 use Cisco\Shadow\flash\Messages;
 use Cisco\Shadow\Request\User;
 use Cisco\Shadow\Router;
@@ -52,7 +53,7 @@ class Auth extends User
             if(!$user || !isset($user)){
                 Router::json(401, "Information incorrect");
             }else{
-                $token = Hash::Cipher($user["phone"], "cyberlyne");
+                $token = Hash::Cipher($user["phone"], $_ENV["secret"]);
 
                 Router::json(200, [["token"=>$token],$user]);
             }
@@ -61,5 +62,9 @@ class Auth extends User
             Router::send(400, "Veuillez renseigner les champs...");
         }
 
+    }
+    function checkUser($data){
+        $token = $data["token"];
+        !Hash::VerifyCipher($token, $_ENV["secret"])?Router::send("401","Non authorisé"):Router::send(200,"connect");
     }
 }
