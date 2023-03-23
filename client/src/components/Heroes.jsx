@@ -72,9 +72,8 @@ function Heroes() {
         <div className='text-center w-1/2 lg:text-left'>
           <h1 className='text-5xl font-bold'>Reserver maintenant!</h1>
           <p className='py-6'>
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+           Reserver vos ticket pour un voyage  confortable.
+           notre plus grande force est de rester a l'ecoute de notre clientelle .. satisfait ou rembourser
           </p>
         </div>
         <div className='card flex-shrink-0 w-full lg:max-w-lg max-w-sm shadow-2xl bg-base-100'>

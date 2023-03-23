@@ -1,7 +1,7 @@
 import React from "react";
 import {json, Link} from "react-router-dom";
 import {toast} from "react-toastify";
-import logImg from "../img/loginbg.jpg";
+import logImg from "../img/t.png";
 function Login() {
   const [userData, setUserData] = React.useState({
     username: "",

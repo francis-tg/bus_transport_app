@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import imgReg from "../img/register.jpg";
+import imgReg from "../img/o.png";
 function Register() {
   return (
     <div className='lg:mx-32'>
@@ -10,7 +10,7 @@ function Register() {
         </div>
         <div className='flex-shrink-0 lg:w-1/2 w-full '>
           <div className='card-body'>
-            <h2 className='text-3xl font-bold'>Veuillez-vous connecter</h2>
+            <h2 className='text-3xl font-bold'>Veuillez creer votre compte</h2>
             <div className='form-control'>
               <label className='label'>
                 <span className='label-text'>Nom</span>
@@ -60,7 +60,7 @@ function Register() {
               </label>
             </div>
             <div className='form-control mt-6'>
-              <button className='btn btn-primary'>Login</button>
+              <button className='btn btn-primary'>Enregistrer</button>
             </div>
           </div>
         </div>
