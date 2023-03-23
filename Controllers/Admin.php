@@ -15,5 +15,8 @@ class Admin extends ORM
        View::render("admin/index", ["title"=>"Admin","users" => $users, "roles" => $role]);
 
     }
+    function Login(){
+        View::render("admin/login");
+    }
     
 }

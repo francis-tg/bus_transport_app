@@ -23,11 +23,13 @@ $db = new ORM();
 
 $router = new View();
 
-$router->get("/",Client::class."::Index");
-$router->get("/admin",Admin::class . "::Index");
+//$router->get("/",Client::class."::Index");
+$router->get("/",Admin::class . "::Index");
 
 
-$router->get("/login", Auth::class."::login");
+$router->post("/login", Auth::class."::auth");
+$router->get("/login", Admin::class . "::login");
+
 $router->get("/trajet", Trajet::class . "::Home");
 
 $router->post("/add-user", User::class . "::addUser");

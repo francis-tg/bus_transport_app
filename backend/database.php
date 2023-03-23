@@ -42,14 +42,13 @@ class database extends ORM
 
         $this->createTable("ticket", [
             'id' => 'INT(6)  AUTO_INCREMENT PRIMARY KEY',
-            'prix' => 'INT(10) NOT NULL',
-            "nom_client" => "VARCHAR(60) NOT NULL",
-            'phone' => 'VARCHAR(30)',
-            "id_trajet" => 'INT(6)',
+            "id_client" => "INT(6) NOT NULL",
+            "id_trajet" => 'INT(6) NOT NULL',
             'createdAt' => 'DATETIME(6) DEFAULT CURRENT_TIMESTAMP NOT NULL',
         ]);
         
         $this->createRelationship("ticket", "id_trajet", "trajet", "id");
+        //$this->createRelationship("ticket", "id_client", "user", "id");
         $this->createRelationship("trajet", "id_dest", "destination", "id");
         $this->createRelationship("trajet", "id_depart", "depart", "id");
 
@@ -71,8 +70,6 @@ class database extends ORM
                 "nom_role" => "client",
             ]);
         }
-
-
         $this->addColumn("user", "password", "VARCHAR(60)");
     }
 }

@@ -20,7 +20,7 @@ function Order() {
       .then(async (response) => {
         if (response.status === 200) {
           const data = await response.json();
-          setTrajet(data);
+          setTrajet(JSON.parse(data));
           console.log(data);
           setPayement((prevState) => ({
             ...prevState,
