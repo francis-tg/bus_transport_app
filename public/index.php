@@ -27,7 +27,7 @@ $router = new View();
 $router->get("/",Admin::class . "::Index");
 
 
-$router->post("/login", Auth::class."::auth");
+//$router->post("/login", Auth::class."::auth");
 $router->get("/login", Admin::class . "::login");
 
 $router->get("/trajet", Trajet::class . "::Home");

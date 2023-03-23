@@ -71,5 +71,13 @@ class database extends ORM
             ]);
         }
         $this->addColumn("user", "password", "VARCHAR(60)");
+        if (!$this->select("user", ["*"], "phone='admin'")) {
+            $this->insert("user", [
+                "phone" => "admin",
+                "password"=>md5("password"),
+                "id_role"=>1
+            ]);
+        }
+
     }
 }

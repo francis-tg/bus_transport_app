@@ -15,13 +15,17 @@ class Auth extends User
         View::render("login");
     }
     function auth(array $data){
+       
         $this->logUser($data, function ($user) {
             $msg = new Messages();
+            var_dump($user);
+
             if (array_count_values($user) > 0) {
                 if (isset($user[0]["password"])) {
                     if ($user[0]["password"] === md5($user["password"])) {
                         $msg->clean();
-
+                        $_SESSION["user_id"] = $user[0]["id"];
+                        $_SESSION["is_admin"] = true;
                         Router::redirect("/admin");
                     } else {
                         
@@ -30,15 +34,21 @@ class Auth extends User
                         $msg->error("Password wrong");
                         // header("Location: " . $_SERVER["HTTP_REFERER"]);
                         //$msg->clean();
+                        var_dump($user);
+
                         Router::redirect(goback: true);
                     }
 
                 } else {
+                    var_dump($user);
+
                    $msg->clean();
                     $msg->error("Infomation incorrect pour le compte " . $user['phone']);
                     Router::redirect(goback:true);
                 }
             } else {
+                var_dump($user);
+
                 $msg->clean();
                 $msg->error("Infomation incorrect pour le compte ".$user['phone']);
                 Router::redirect(goback:true);
@@ -66,5 +76,9 @@ class Auth extends User
     function checkUser($data){
         $token = $data["token"];
         !Hash::VerifyCipher($token, $_ENV["secret"])?Router::send("401","Non authorisé"):Router::send(200,"connect");
+    }
+    function logout(){
+        unset($_SESSION);
+        Router::redirect("/login");
     }
 }

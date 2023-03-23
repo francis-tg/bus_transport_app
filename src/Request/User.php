@@ -3,6 +3,7 @@ namespace Cisco\Shadow\Request;
 
 use Cisco\Shadow\Interfaces\UserInterface;
 use Cisco\Shadow\ORM\ORM;
+use Cisco\Shadow\Router;
 
 
 class User extends ORM implements UserInterface
@@ -40,9 +41,14 @@ class User extends ORM implements UserInterface
     }
     public function logUser(array $user_data, $callback)
     {
+        
         if (isset($user_data["phone"])) {
             $user = $this->select("user", ["*"], "phone="."'".$user_data["phone"]."'");
             return call_user_func_array($callback, [array_merge($user_data,$user)]);
+        }else{
+            var_dump($user_data);
+
+            Router::redirect("/login");
         }
     }
     public function setPwd(array $user_data)
