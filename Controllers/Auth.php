@@ -23,10 +23,17 @@ class Auth extends User
             if (array_count_values($user) > 0) {
                 if (isset($user[0]["password"])) {
                     if ($user[0]["password"] === md5($user["password"])) {
+                       if($user[0]["nom_role"]=="administrateur" ||$user[0]["nom_role"]=="personnel"){
                         $msg->clean();
                         $_SESSION["user_id"] = $user[0]["id"];
                         $_SESSION["is_admin"] = true;
                         Router::redirect("/admin");
+                       }else{
+                        $_SESSION["user_id"] = $user[0]["id"];
+                        $_SESSION["is_admin"] = false;
+
+                        Router::redirect("/");
+                       }
                     } else {
                         
                         # code...

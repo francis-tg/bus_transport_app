@@ -19,7 +19,7 @@ class database extends ORM
             'createdAt' => 'DATETIME(6) DEFAULT CURRENT_TIMESTAMP NOT NULL',
         ]);
         $this->createTable("user", [
-            'id' => 'INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY',
+            'id' => 'INT(6) AUTO_INCREMENT PRIMARY KEY',
             'nom' => 'VARCHAR(30) NOT NULL',
             'prenom' => 'VARCHAR(30) NOT NULL',
             'phone' => 'VARCHAR(30)',
@@ -48,7 +48,7 @@ class database extends ORM
         ]);
         
         $this->createRelationship("ticket", "id_trajet", "trajet", "id");
-        //$this->createRelationship("ticket", "id_client", "user", "id");
+        $this->createRelationship("ticket", "id_client", "user", "id");
         $this->createRelationship("trajet", "id_dest", "destination", "id");
         $this->createRelationship("trajet", "id_depart", "depart", "id");
 

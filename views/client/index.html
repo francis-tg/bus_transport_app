@@ -27,17 +27,17 @@
 
 
 
-    <link rel="stylesheet" href="/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="./node_modules/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" href="/css/style.min.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Booking</title>
 </head>
 
 <body>
-   <!--  <div class="loader">
+    <div class="loader">
         <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
-    </div> -->
+    </div>
     <header>
         <nav>
             <div class="logo">Booking <span>Travel</span></div>
@@ -50,8 +50,8 @@
 
             </ul>
             <div class="buttons">
-                <button data-url="/login" class="btn_login clickable">Connectez-vous</button>
-                <button class="btn_sigin clickable" data-url="/register">Créer un compte</button>
+                <button class="btn_login">Login</button>
+                <button class="btn_sigin">Sigin</button>
             </div>
         </nav>
 
@@ -82,11 +82,11 @@
         <div class="book_section">
             <div class="inner_book">
 
-                <input type="text" id="depart" placeholder="Départ">
-                <input type="text" id="arrive" placeholder="Arrivé">
-                <!-- <input type="datetime-local" placeholder="Date de voyage"> -->
-               <!--  <input type="text" placeholder="state"> -->
-                <div class="book-btn" id="doSearch">
+                <input type="text" placeholder="arrival">
+                <input type="text" placeholder="departure">
+                <input type="datetime-local" placeholder="choose room">
+                <input type="text" placeholder="state">
+                <div class="book-btn">
                     <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </div>
 
@@ -100,8 +100,7 @@
 
 
     <div class="contain_item">
-        {% foreach ($trajets as $trajet): %}
-        <div class="item clickable" data-url="/buy?trajet_id={{$trajet['id']}}">
+        <div class="item">
             <div class="header">
                 <div class="left"><img src="./img/card2.jpg" alt="">
                     <h1>Love travel</h1>
@@ -109,147 +108,205 @@
                 <div class="right"><span>VIP</span></div>
             </div>
             <div class="trajet">
-                <span class="heure_depart">{{$trajet["leave_ville"]}}</span><span class="tiret"></span><span class=" heure_arrive ">{{$trajet["dest_ville"]}}</span>
-                <span class="tiret"></span> <span class="duree">{{$trajet["leave_time"]}}</span>
-                <button class="prix_trajet"> {{$trajet["prix"]}} F</button>
+                <span class="heure_depart">4h</span><span class="tiret"></span><span class=" heure_arrive ">4h</span>
+                <span class="tiret"></span> <span class="duree">8h</span>
+                <button class="prix_trajet"> 750 Fcfa</button>
             </div>
         </div>
-        {% endforeach %}
-    
-       
+        <div class="item">
+            <div class="header">
+                <div class="left"><img src="#" alt="">
+                    <h1>Love travel</h1>
+                </div>
+                <div class="right"><span>VIP</span></div>
+            </div>
+            <div class="trajet">
+                <span class="heure_depart">4h</span><span class="tiret"></span><span class=" heure_arrive ">4h</span>
+                <span class="tiret"></span> <span class="duree">8h</span>
+                <button class="prix_trajet"> 750 Fcfa</button>
+            </div>
+
+
+            <span class="more">Voir +</span>
+        </div>
+        <div class="item">
+            <div class="header">
+                <div class="left"><img src="#" alt="">
+                    <h1>Love travel</h1>
+                </div>
+                <div class="right"><span>VIP</span></div>
+            </div>
+            <div class="trajet">
+                <span class="heure_depart">4h</span><span class="tiret"></span><span class=" heure_arrive ">4h</span>
+                <span class="tiret"></span> <span class="duree">8h</span>
+                <button class="prix_trajet"> 750 Fcfa</button>
+            </div>
+            <span class="more">Voir +</span>
+
+        </div>
+        <div class="item">
+            <div class="header">
+                <div class="left"><img src="#" alt="">
+                    <h1>Love travel</h1>
+                </div>
+                <div class="right"><span>VIP</span></div>
+            </div>
+            <div class="trajet">
+                <span class="heure_depart">4h</span><span class="tiret"></span><span class=" heure_arrive ">4h</span>
+                <span class="tiret"></span> <span class="duree">8h</span>
+                <button class="prix_trajet"> 750 Fcfa</button>
+            </div>
+            <span class="more">Voir +</span>
+
+        </div>
+        <div class="item">
+            <div class="header">
+                <div class="left"><img src="#" alt="">
+                    <h1>Love travel</h1>
+                </div>
+                <div class="right"><span>VIP</span></div>
+            </div>
+            <div class="trajet">
+                <span class="heure_depart">4h</span><span class="tiret"></span><span class=" heure_arrive ">4h</span>
+                <span class="tiret"></span> <span class="duree">8h</span>
+                <button class="prix_trajet"> 750 Fcfa</button>
+            </div>
+            <span class="more">Voir +</span>
+
+        </div>
 
     </div>
 
 
     <div class="popular_destination">
-    
+
         <div class="header">
             <span>
                 My destination
             </span>
             <h1>Our favorite destinations</h1>
         </div>
-    
+
         <div class="slider_container swiper">
-    
+
             <div class="slide-content">
                 <div class="card-wrapper swiper-wrapper">
                     <div class="card swiper-slide">
                         <div class="image-content">
                             <img src="./img/card2.jpg" alt="">
                         </div>
-    
+
                         <div class="card-content">
-    
+
                             <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
                             <h2>cite de paradi</h2>
                             <div class="note">
                                 <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
                                 <p><span>$32 days</span></p>
                             </div>
-    
+
                         </div>
                     </div>
                     <div class="card swiper-slide">
                         <div class="image-content">
-    
+
                             <img src="./img/card1.jpg" alt="">
-    
-    
+
+
                         </div>
-    
+
                         <div class="card-content">
-    
-    
+
+
                             <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
                             <h2>cite de paradi</h2>
                             <div class="note">
                                 <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
                                 <p><span>$32 days</span></p>
                             </div>
-    
+
                         </div>
                     </div>
                     <div class="card swiper-slide">
                         <div class="image-content">
                             <img src="./img/card3.jpg" alt="">
                         </div>
-    
+
                         <div class="card-content">
-    
-    
+
+
                             <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
                             <h2>cite de paradi</h2>
                             <div class="note">
                                 <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
                                 <p><span>$32 days</span></p>
                             </div>
-    
+
                         </div>
                     </div>
                     <div class="card swiper-slide">
                         <div class="image-content">
                             <img src="./img/card4.jpg" alt="">
                         </div>
-    
+
                         <div class="card-content">
-    
-    
+
+
                             <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
                             <h2>cite de paradi</h2>
                             <div class="note">
                                 <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
                                 <p><span>$32 days</span></p>
                             </div>
-    
+
                         </div>
                     </div>
                     <div class="card swiper-slide">
                         <div class="image-content">
                             <img src="./img/card2.jpg" alt="">
                         </div>
-    
+
                         <div class="card-content">
-    
-    
+
+
                             <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
                             <h2>cite de paradi</h2>
                             <div class="note">
                                 <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
                                 <p><span>$32 days</span></p>
                             </div>
-    
+
                         </div>
                     </div>
                     <div class="card swiper-slide">
                         <div class="image-content">
                             <img src="./img/card4.jpg" alt="">
                         </div>
-    
+
                         <div class="card-content">
-    
-    
-    
+
+
+
                             <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
                             <h2>cite de paradi</h2>
                             <div class="note">
                                 <p class="secondNote"><span><i class="fa-solid fa-star"></i>4.5 note</span></p>
                                 <p><span>$32 days</span></p>
                             </div>
-    
+
                         </div>
                     </div>
                     <div class="card swiper-slide">
                         <div class="image-content">
-    
-    
+
+
                             <img src="./img/card1.jpg" alt="">
-    
-    
+
+
                         </div>
-    
+
                         <div class="card-content">
-    
+
                             <span> <i class="fa-solid fa-location-dot"></i> Logpom de la cite</span>
                             <h2>cite de paradi</h2>
                             <div class="note">
@@ -260,29 +317,29 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div> -->
-    
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div> -->
+
         </div>
-    
-    
+
+
     </div>
-    
+
     <div class="service">
         <div class="left">
-    
+
             <div class="image">
                 <img src="./img/bgService.jpg" alt="">
             </div>
-    
-    
+
+
         </div>
         <div class="right">
-    
+
             <div class="center">
-    
+
                 <div class="header">
                     <span>Best services</span>
                     <h1>Feel the best experience with our rental deals</h1>
@@ -315,56 +372,56 @@
                             <p>Find a lower price we'll refund you 100% of the difference</p>
                         </div>
                     </div>
-    
+
                 </div>
-    
-    
-    
+
+
+
             </div>
         </div>
     </div>
-    
+
     <div class="destination_inspiration">
         <h1>Be Inspired For The Next Vacation</h1>
         <div class="contain_inspiration">
             <div class=" card card1">
                 <div class="img"><img src="./img/card1.jpg" alt=""></div>
                 <div class="card_text">
-    
+
                     <p>I am here</p>
                 </div>
             </div>
             <div class=" card card2">
                 <div class="img"><img src="./img/card2.jpg" alt=""></div>
                 <div class="card_text">
-    
+
                     <p>I am here</p>
                 </div>
             </div>
             <div class=" card card3">
                 <div class="img"><img src="./img/card3.jpg" alt=""></div>
                 <div class="card_text">
-    
+
                     <p>I am here</p>
                 </div>
             </div>
             <div class=" card card4">
                 <div class="img"><img src="./img/card4.jpg" alt=""></div>
                 <div class="card_text">
-    
+
                     <p>I am here</p>
                 </div>
             </div>
             <div class=" card card5">
                 <div class="img"><img src="img/card3.jpg" alt=""></div>
                 <div class="card_text">
-    
+
                     <p>I am here</p>
                 </div>
             </div>
         </div>
-    
-    
+
+
     </div>
 
 
@@ -391,25 +448,11 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
-    <script src="/swiper/swiper-bundle.min.js"></script>
+    <script src="./node_modules/swiper/swiper-bundle.min.js"></script>
 
-    <script src="/js/app.js"></script>
-    <script src="/js/swiper.js"></script>
-    
+    <script src="./js/app.js"></script>
+    <script src="./js/swiper.js"></script>
+    <script src="./js/loader.js"></script>
 </body>
 
 </html>
-<script>
-    document.querySelector("#doSearch").addEventListener("click",()=>{
-        const depart = document.querySelector("#depart").value;
-        const arrive = document.querySelector("#arrive").value;
-        return location.href = `${location.origin}?depart=${depart}&arrive=${arrive}`;
-    })
-    const clickables = document.querySelectorAll(".clickable");
-
-    clickables.forEach(c=>{
-        c.addEventListener("click",e=>{
-            location.href = `${location.origin}${c.getAttribute("data-url")}`;
-        })
-    })
-</script>

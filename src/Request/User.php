@@ -41,9 +41,8 @@ class User extends ORM implements UserInterface
     }
     public function logUser(array $user_data, $callback)
     {
-        
         if (isset($user_data["phone"])) {
-            $user = $this->select("user", ["*"], "phone="."'".$user_data["phone"]."'");
+            $user = $this->selectOne("user", ["*"],[["phone"=>$user_data["phone"]]],include:["role"=>"id_role"]);
             return call_user_func_array($callback, [array_merge($user_data,$user)]);
         }else{
             var_dump($user_data);
