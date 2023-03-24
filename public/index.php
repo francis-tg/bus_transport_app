@@ -24,11 +24,12 @@ $db = new ORM();
 $router = new View();
 
 //$router->get("/",Client::class."::Index");
-$router->get("/",Admin::class . "::Index");
+$router->get("/admin",Admin::class . "::Index");
 
 
 //$router->post("/login", Auth::class."::auth");
 $router->get("/login", Admin::class . "::login");
+$router->get("/logout", Admin::class . "::logout");
 
 $router->get("/trajet", Trajet::class . "::Home");
 
@@ -45,6 +46,8 @@ $router->get("/api/trajet", Trajet::class . "::getTrajetById");
 $router->post("/api/login", Auth::class."::auth");
 $router->post("/api/client-login", Auth::class . "::userAuth");
 $router->post("/api/check-user", Auth::class . "::checkUser");
+
+$router->get("/", Client::class . "::Index");
 
 $router->get("/user/set-pwd", function () {
 

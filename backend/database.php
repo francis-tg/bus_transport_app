@@ -54,24 +54,24 @@ class database extends ORM
 
 
 
-        if (!$this->select("role", ["*"],"nom_role='administrateur'")) {
+        if (!$this->select("role", ["*"],where:[["nom_role"=>"administrateur"]])) {
             $this->insert("role", [
                 "nom_role" => "administrateur",
             ]);
 
         }
-        if (!$this->select("role", ["*"],"nom_role='personnel'")) {
+        if (!$this->selectOne("role", ["*"],where:[["nom_role"=>"personnel"]])) {
             $this->insert("role", [
                 "nom_role" => "personnel",
             ]);
         }
-        if (!$this->select("role", ["*"], "nom_role='client'")) {
+        if (!$this->selectOne("role", ["*"], where: [["nom_role"=>"client"]])) {
             $this->insert("role", [
                 "nom_role" => "client",
             ]);
         }
         $this->addColumn("user", "password", "VARCHAR(60)");
-        if (!$this->select("user", ["*"], "phone='admin'")) {
+        if (!$this->selectOne("user", ["*"], where:[["phone"=>"admin"]])) {
             $this->insert("user", [
                 "phone" => "admin",
                 "password"=>md5("password"),

@@ -1,6 +1,7 @@
 <?php
 
 namespace Cisco\Shadow\ORM;
+
 use Cisco\Shadow\cli\Cli;
 session_start();
 
@@ -8,14 +9,14 @@ use PDO;
 
 class ORM extends db
 {
-      /**
-       * Summary of createTable
-       * @param string $table_name
-       * @param array $fields
-       * @return void
-       */
-    
-    public function createTable(string $table_name, array $fields )
+    /**
+     * Summary of createTable
+     * @param string $table_name
+     * @param array $fields
+     * @return void
+     */
+
+    public function createTable(string $table_name, array $fields)
     {
         // Start building the SQL query
         $query = "CREATE TABLE IF NOT EXISTS $table_name (\n";
@@ -26,7 +27,7 @@ class ORM extends db
 
         // Remove the trailing comma and add the closing parenthesis
         $query = rtrim($query, ",\n") . "\n)";
-        
+
         // Execute the query
         $this->pdo->exec($query);
     }
@@ -38,17 +39,17 @@ class ORM extends db
      * @param string $related_field
      * @return void
      */
-    public function createRelationship(string $table_name, string $field_name,string  $related_table, string $related_field)
+    public function createRelationship(string $table_name, string $field_name, string $related_table, string $related_field)
     {
-        $fq = "SELECT table_name, 
-            column_name, 
-            referenced_table_name, 
+        $fq = "SELECT table_name,
+            column_name,
+            referenced_table_name,
             referenced_column_name
             FROM information_schema.key_column_usage
             WHERE table_name='$table_name' AND referenced_table_name = '$related_table'";
         $f = $this->pdo->prepare($fq);
         $f->execute();
-        if(empty($f->fetch()["referenced_table_name"])==true){
+        if (empty($f->fetch()["referenced_table_name"]) == true) {
             $query = "ALTER TABLE $table_name ADD FOREIGN KEY ($field_name) REFERENCES $related_table($related_field) ON DELETE CASCADE ON UPDATE CASCADE";
             $this->pdo->exec($query);
 
@@ -61,7 +62,8 @@ class ORM extends db
      * @param string $value
      * @return void
      */
-    function addColumn(string $table_name, string $field_name, string  $value){
+    public function addColumn(string $table_name, string $field_name, string $value)
+    {
         $query = "ALTER TABLE $table_name ADD IF NOT EXISTS $field_name $value";
         Cli::consoleLog("info", $query);
         $this->pdo->exec($query);
@@ -70,36 +72,47 @@ class ORM extends db
      * Summary of select
      * @param string $table
      * @param array $fields
-     * @param string $where
+     * @param array $where
      * @param string $order_by
      * @param string $limit
+     * @param array $include
      * @return mixed
      */
-    public function select(string $table, array $fields=["*"], string $where = "", string $order_by = "", string $limit = "", array $include=[])
+    public function select(string $table, array $fields = ["*"], array $where = [], string $order_by = "", string $limit = "", array $include = [])
     {
         $query = "SELECT " . implode(", ", $fields) . " FROM " . $table;
-        if(count($include) >0){
+        if (count($include) > 0) {
             $joins = "";
             foreach ($include as $r_table => $r_column) {
-                $joins .=" JOIN $r_table ON $table".".".$r_column." = ".$r_table.".id ";
+                $joins .= " JOIN $r_table ON $table" . "." . $r_column . " = " . $r_table . ".id ";
             }
             $query .= $joins;
         }
-        if ($where != "") {
-            $query .= " WHERE " . $where;
+        if (isset($where)&&count($where) !== 0) {
+            $joins_where = "";
+
+            $shift_array = array_shift($where);
+
+            $extractfirst = array_keys($shift_array)[0];
+
+            $joins_where .= " WHERE $extractfirst = '" . $shift_array[$extractfirst] . "'";
+            foreach ($where as $column => $value) {
+                $joins_where .= " AND " . array_keys($value)[0] . " = '" . array_values($value)[0] . "'";
+            }
+            $query .= $joins_where;
         }
-        
         if ($order_by != "") {
             $query .= " ORDER BY " . $order_by;
         }
-        if ($limit != "") {
-            $query .= " LIMIT " . $limit;
-        }
+       if($limit!==""){
+        $query .= " LIMIT " . $limit;
+
+       }
+        Cli::consoleLog("info", $query);
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        Cli::consoleLog("info", $query);
-
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
     /**
      * Summary of selectOne
@@ -110,7 +123,8 @@ class ORM extends db
      * @param array $include
      * @return mixed
      */
-    public function selectOne(string $table, array $fields=["*"], array $where=[], string $order_by = "",array $include=[]){
+    public function selectOne(string $table, array $fields = ["*"], array $where = [], string $order_by = "", array $include = [])
+    {
         $limit = 1;
         $query = "SELECT " . implode(", ", $fields) . " FROM " . $table;
         if (count($include) > 0) {
@@ -121,17 +135,16 @@ class ORM extends db
             $query .= $joins;
         }
 
-        if (array_keys($where)>0) {
+        if (array_keys($where) > 0) {
             $joins_where = "";
-            
 
             $shift_array = array_shift($where);
 
             $extractfirst = array_keys($shift_array)[0];
-           
+
             $joins_where .= " WHERE $extractfirst = '" . $shift_array[$extractfirst] . "'";
             foreach ($where as $column => $value) {
-                $joins_where .= " AND ".array_keys($value)[0]." = '".array_values($value)[0]."'";
+                $joins_where .= " AND " . array_keys($value)[0] . " = '" . array_values($value)[0] . "'";
             }
             $query .= $joins_where;
         }
@@ -142,7 +155,7 @@ class ORM extends db
         Cli::consoleLog("info", $query);
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
     /**
@@ -167,8 +180,8 @@ class ORM extends db
      * @param array $data
      * @param string $where
      * @return mixed
-     * 
-     * 
+     *
+     *
      */
     public function update(string $table, array $data, string $where)
     {

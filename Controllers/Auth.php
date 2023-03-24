@@ -34,14 +34,10 @@ class Auth extends User
                         $msg->error("Password wrong");
                         // header("Location: " . $_SERVER["HTTP_REFERER"]);
                         //$msg->clean();
-                        var_dump($user);
-
                         Router::redirect(goback: true);
                     }
 
                 } else {
-                    var_dump($user);
-
                    $msg->clean();
                     $msg->error("Infomation incorrect pour le compte " . $user['phone']);
                     Router::redirect(goback:true);

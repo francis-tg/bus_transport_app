@@ -1,83 +1,163 @@
-{% extends ../views/layouts/client.shadow.html %}
-{% block title %}{{ $title }}{% endblock %}
-{% block content %}
-<nav class="navbar d-flex justify-content-between navbar-dark bg-gray-700 align-content-center">
-    <div class="navbar-brand">
-        <a href="#" class="text-white">
-            Travel Booking
-        </a>
-    </div>
-    <ul class="list-unstyled">
-        <li class="nav-item"><a href="#" class="btn btn-outline-dark text-white">Connection</a></li>
-    </ul>
+<!DOCTYPE html>
+<html lang="en">
 
-</nav>
-<main>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/brands.min.css"
+        integrity="sha512-G/T7HQJXSeNV7mKMXeJKlYNJ0jrs8RsWzYG7rVACye+qrcUhEAYKYzaa+VFy6eFzM2+/JT1Q+eqBbZFSHmJQew=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/brands.min.css"
+        integrity="sha512-G/T7HQJXSeNV7mKMXeJKlYNJ0jrs8RsWzYG7rVACye+qrcUhEAYKYzaa+VFy6eFzM2+/JT1Q+eqBbZFSHmJQew=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css"
+        integrity="sha512-giQeaPns4lQTBMRpOOHsYnGw1tGVzbAIHUyHRgn7+6FmiEgGGjaG0T2LZJmAPMzRCl+Cug0ItQ2xDZpTmEc+CQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
+
+    <link rel="stylesheet" href="/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <title>Booking</title>
+</head>
+
+<body>
+   <!--  <div class="loader">
+        <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
+    </div> -->
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="header-text">
-                    <h2>
-                        Reserver vos tickets la veille
-                    </h2>
-                    <div class="float-rigth">
-                        <button class="btn btn-outline-dark">Reserver maintenant</button>
-                    </div>
-                </div>
-                <div class="header-img">
-                    <img src="/img/ImgBg.png" alt="Header">
-                </div>
+        <nav>
+            <div class="logo">Booking <span>Travel</span></div>
+
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Bus</a></li>
+                <li><a href="#">Hotels</a></li>
+                <li><a href="#">Vol</a></li>
+
+            </ul>
+            <div class="buttons">
+                <button class="btn_login">Login</button>
+                <button class="btn_sigin">Sigin</button>
+            </div>
+        </nav>
+
+    </header>
+
+
+
+    <div class="hero">
+
+        <div class="left">
+
+            <div class="center">
+                <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+                <p>With Booking travel, you can travel around the world at a lower cost. <br> it is a solution that has
+                    been designed by Cameroonian developers in order to help the population through the reduction of
+                    travel costs whether by bus, plane or train</p>
+                <button>Booking Now !</button>
+
             </div>
         </div>
-    </header>
-    <section id="reservation" class="container">
-        <div class="field">
-            <input type="text" list="depart" id="_depart" onchange="changeState(e)" class="form-control" placeholder="Ville de départ">
-            <datalist id="depart">
-                {% foreach ($villes_depart as $depart): %}
-                <option value="{{$depart["leave_ville"]}}"></option>
-                {% endforeach %}
-            </datalist>
-        </div>
-        <div class="field">
-            <input type="text" list="arrive" id="_arrive" onchange="changeState(e)" class="form-control" placeholder="Ville d'arrive">
-            <datalist id="arrive">
-                {% foreach ($villes_arrive as $arrive): %}
-                <option value="{{$arrive["dest_ville"]}}"></option>
-                {% endforeach %}
-            </datalist>
-        </div>
-       <div class="field">
-        <input type="datetime-local" class="form-control" placeholder="Date de départ">
-        
-       </div>
-       <div class="field">
-        <div class="book-btn">
-            <a href="#" onclick="sb()" class="btn btn-dark">Reserver</a>
-        </div>
-       </div>
-    </section>
-</main>
-<script>
-    const state = {
-            depart: "",
-            arrive: ""
-        }
-    function changeState(e){
-        const getKey = Object.keys(state);
-        getKey.forEach(k=>{
-            if(k.match("/depart/")){
-                return state.depart = e.target.value;
-            }
-            if (k.match("/arrive/")) {
-                return state.arrive = e.target.value;
-            }
-        })
-    }
+        <div class="right">
+            <div class="img">
+                <img src="./img/ImgBg.png" alt="">
+            </div>
 
-    function sb (){
-        console.log(state)
-    }
+        </div>
+
+        <div class="book_section">
+            <div class="inner_book">
+
+                <input type="text" id="depart" placeholder="Départ">
+                <input type="text" id="arrive" placeholder="Arrivé">
+                <!-- <input type="datetime-local" placeholder="Date de voyage"> -->
+               <!--  <input type="text" placeholder="state"> -->
+                <div class="book-btn" id="doSearch">
+                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="vide"></div>
+
+
+    <div class="contain_item">
+        {% foreach ($trajets as $trajet): %}
+        <div class="item">
+            <div class="header">
+                <div class="left"><img src="./img/card2.jpg" alt="">
+                    <h1>Love travel</h1>
+                </div>
+                <div class="right"><span>VIP</span></div>
+            </div>
+            <div class="trajet">
+                <span class="heure_depart">{{$trajet["leave_ville"]}}</span><span class="tiret"></span><span class=" heure_arrive ">{{$trajet["dest_ville"]}}</span>
+                <span class="tiret"></span> <span class="duree">{{$trajet["leave_time"]}}</span>
+                <button class="prix_trajet"> {{$trajet["prix"]}} F</button>
+            </div>
+        </div>
+        {% endforeach %}
     
+       
+
+    </div>
+
+
+    
+
+
+    <div class="footer">
+        <div class="logo">
+
+            <h1>Booking Travel</h1>
+        </div>
+        <ul>
+            <li><a href="#"> Bookin</a></li>
+            <li><a href="#"> Sevice</a></li>
+            <li><a href="#"> About</a></li>
+            <li><a href="#"> Destination</a></li>
+        </ul>
+
+        <div class="social"><span><i class="fa-brands fa-facebook"></i></span><i
+                class="fa-brands fa-twitter"></i><span><i class="fa-brands fa-square-instagram"></i></span><i
+                class="fa-brands fa-youtube"></i></div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+    <script src="./node_modules/swiper/swiper-bundle.min.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/swiper.js"></script>
+    <script src="/js/loader.js"></script>
+</body>
+
+</html>
+<script>
+    document.querySelector("#doSearch").addEventListener("click",()=>{
+        const depart = document.querySelector("#depart").value;
+        const arrive = document.querySelector("#arrive").value;
+        return location.href = `${location.origin}?depart=${depart}&arrive=${arrive}`;
+    })
 </script>
-{% endblock %}

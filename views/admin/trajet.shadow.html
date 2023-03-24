@@ -188,9 +188,9 @@
                     </div>
                     <div class="form-group">
                         <label>Ville d'arrivée</label>
-                        <input type="text" name="ville_arrive" list="ville_arrive" class="form-control"
+                        <input type="text" name="ville_arrive" list="dest_arrive" class="form-control"
                             placeholder="Heure d'arrivée">
-                            <datalist id="ville_arrive">
+                            <datalist id="dest_arrive">
                                 {% foreach ($villes_arrive as $arrive): %}
                                 <option value="{{$arrive["dest_ville"]}}"></option>
                                 {% endforeach %}

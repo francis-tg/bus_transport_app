@@ -1,0 +1,83 @@
+{% extends ../views/layouts/client.shadow.html %}
+{% block title %}{{ $title }}{% endblock %}
+{% block content %}
+<nav class="navbar d-flex justify-content-between navbar-dark bg-gray-700 align-content-center">
+    <div class="navbar-brand">
+        <a href="#" class="text-white">
+            Travel Booking
+        </a>
+    </div>
+    <ul class="list-unstyled">
+        <li class="nav-item"><a href="#" class="btn btn-outline-dark text-white">Connection</a></li>
+    </ul>
+
+</nav>
+<main>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h2>
+                        Reserver vos tickets la veille
+                    </h2>
+                    <div class="float-rigth">
+                        <button class="btn btn-outline-dark">Reserver maintenant</button>
+                    </div>
+                </div>
+                <div class="header-img">
+                    <img src="/img/ImgBg.png" alt="Header">
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="reservation" class="container">
+        <div class="field">
+            <input type="text" list="depart" id="_depart" onchange="changeState(e)" class="form-control" placeholder="Ville de départ">
+            <datalist id="depart">
+                {% foreach ($villes_depart as $depart): %}
+                <option value="{{$depart["leave_ville"]}}"></option>
+                {% endforeach %}
+            </datalist>
+        </div>
+        <div class="field">
+            <input type="text" list="arrive" id="_arrive" onchange="changeState(e)" class="form-control" placeholder="Ville d'arrive">
+            <datalist id="arrive">
+                {% foreach ($villes_arrive as $arrive): %}
+                <option value="{{$arrive["dest_ville"]}}"></option>
+                {% endforeach %}
+            </datalist>
+        </div>
+       <div class="field">
+        <input type="datetime-local" class="form-control" placeholder="Date de départ">
+        
+       </div>
+       <div class="field">
+        <div class="book-btn">
+            <a href="#" onclick="sb()" class="btn btn-dark">Reserver</a>
+        </div>
+       </div>
+    </section>
+</main>
+<script>
+    const state = {
+            depart: "",
+            arrive: ""
+        }
+    function changeState(e){
+        const getKey = Object.keys(state);
+        getKey.forEach(k=>{
+            if(k.match("/depart/")){
+                return state.depart = e.target.value;
+            }
+            if (k.match("/arrive/")) {
+                return state.arrive = e.target.value;
+            }
+        })
+    }
+
+    function sb (){
+        console.log(state)
+    }
+    
+</script>
+{% endblock %}
